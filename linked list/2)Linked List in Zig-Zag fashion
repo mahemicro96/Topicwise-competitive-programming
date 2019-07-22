@@ -1,0 +1,30 @@
+Node *zigZack(Node* head)
+{
+ // your code goes here
+ int c=0;
+ Node *p=head;
+ while(p&&p->next)
+ {
+     int k=p->data;
+     int g=p->next->data;
+     c++;
+     if(c%2)
+     {
+         if(k>g)
+         {
+             p->data=g;
+             p->next->data=k;
+         }
+     }
+     else
+     {
+         if(k<g)
+         {
+             p->data=g;
+             p->next->data=k;
+         }
+     }
+     p=p->next;
+ }
+ return head;
+}
