@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <list>
+#include <algorithm>
+using namespace std;
+int find(char k)
+{
+    if (k == 'I')
+        return 1;
+    if (k == 'V')
+        return 5;
+    if (k == 'X')
+        return 10;
+    if (k == 'L')
+        return 50;
+    if (k == 'C')
+        return 100;
+    if (k == 'D')
+        return 500;
+    if (k == 'M')
+        return 1000;
+}
+
+main()
+{
+    int n;
+    cin >> n;
+    while (n--) {
+        string s;
+        cin >> s;
+        int v = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int a = find(s[i]);
+            if (i + 1 < s.length()) {
+                int b = find(s[i + 1]);
+                if (a < b)
+                    v = v - a;
+                else
+                    v = v + a;
+            }
+            else {
+                v = v + a;
+            }
+        }
+        cout << v << endl;
+    }
+}
