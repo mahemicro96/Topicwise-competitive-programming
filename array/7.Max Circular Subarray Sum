@@ -1,0 +1,49 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+using namespace std;
+int kaden(vector<int>v)
+{
+    int max=0,cmax=0;
+    for(int i=0;i<v.size();i++)
+    {
+        max=max+v[i];
+        if(max>cmax)
+        cmax=max;
+        if(max<0)
+        max=0;
+    }
+    return cmax;
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    
+       int e;
+       cin>>e;
+       vector<int>v(e);
+       for(int i=0;i<e;i++)
+       cin>>v[i];
+       auto t=max_element(v.begin(),v.end());
+       int r1=*t;
+       int s=0;
+        for(int i=0;i<e;i++)
+        s=s+v[i];
+        int max1=kaden(v);
+       for(int i=0;i<e;i++)
+       v[i]=v[i]*-1;
+       int p=kaden(v);
+       int max2=s+p;
+       int r=max(max1,max2);
+       
+       if(r==0)
+       cout<<r1<<endl;
+       else
+       cout<<r<<endl;
+       
+       
+    }
+}
