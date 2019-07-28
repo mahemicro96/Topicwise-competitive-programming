@@ -1,0 +1,72 @@
+method:1
+with recursion
+int evalTree(node* root)
+{
+if(root!=NULL){
+if(root->left==NULL && root->right==NULL)
+return stoi(root->data);
+int a=evalTree(root->left);
+int b=evalTree(root->right);
+if(root->data=="+")
+return a+b;
+else if(root->data=="-")
+return a-b;
+else if(root->data=="*")
+return a*b;
+else
+return a/b;
+}
+}
+---------------------
+without recursion
+int evalTree(node* root)
+{
+    stack<node*>a;
+    stack<string>b;
+    a.push(root);
+    while(a.size())
+    {
+        node *p=a.top();
+        a.pop();
+        b.push(p->data);
+        if(p->left)a.push(p->left);
+        if(p->right)a.push(p->right);
+    }
+    stack<string>c;
+    while(b.size())
+    {
+        string k=b.top();
+        b.pop();
+        if(k=="+"||k=="-"||k=="*"||k=="/")
+        {
+            int m=stoi(c.top());
+            c.pop();
+             int n=stoi(c.top());
+            c.pop();
+            if(k=="+")
+            {
+                int r=m+n;
+                c.push(to_string(r));
+            }
+            if(k=="-")
+            {
+                int r=n-m;
+                c.push(to_string(r));
+            }
+            if(k=="*")
+            {
+                int r=m*n;
+                c.push(to_string(r));
+            }
+            if(k=="/")
+            {
+                int r=n/m;
+                c.push(to_string(r));
+            }
+            
+        }
+        else
+        c.push(k);
+    }
+    return stoi(c.top());
+}
