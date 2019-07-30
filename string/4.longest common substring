@@ -40,3 +40,29 @@ main()
     cout<<endl;
     }
 }
+-------------------------------
+reduse space complexity:
+string LCS(string x,string y,int n,int m)
+{
+	int dp[2][m+1];
+	memset(dp,0,sizeof dp);
+ 
+	int b,mxlen=0,end=0;
+	for(int i=1;i<=n;i++){
+		b = i&1;
+		memset(dp[b],0,sizeof(dp[b]));   // need to clear in every iteration 
+		for(int j=1;j<=m;j++)
+		{
+			if(x[i-1]==y[j-1])
+			{
+				dp[b][j] = dp[1-b][j-1]+1;
+				if(mxlen < dp[b][j])
+				{
+					mxlen = dp[b][j];
+					end = i;
+				}
+			}
+		}
+	}
+	return x.substr(end-mxlen,mxlen);
+}
