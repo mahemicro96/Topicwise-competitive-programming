@@ -1,0 +1,42 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+using namespace std;
+void lcs(string s,string t)
+{
+    int p=s.length()+1;
+    int q=t.length()+1;
+    int arr[p][q];
+    
+    int r=0;
+    for(int i=0;i<p;i++)
+    {
+        for(int j=0;j<q;j++)
+        {
+            if(i==0||j==0)
+            arr[i][j]=0;
+            else if(s[i-1]==t[j-1])
+            {
+                arr[i][j]=arr[i-1][j-1]+1;
+            r=max(arr[i][j],r);
+            }
+            else
+            arr[i][j]=0;
+        }
+    }
+    cout<<r;
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    int a,b;
+    cin>>a>>b;
+    string s,t;
+    cin>>s>>t;
+    lcs(s,t);
+    cout<<endl;
+    }
+}
