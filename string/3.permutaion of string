@@ -1,0 +1,56 @@
+without stl:
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+void permut(string s,int st,int l)
+{
+    if(st==l)
+    cout<<s<<" ";
+    else
+    {
+        for(int i=st;i<=l;i++)
+        {
+            swap(s[i],s[st]);
+            sort(s.begin()+st+1,s.end());
+            permut(s,st+1,l);
+            sort(s.begin()+st+1,s.end());
+            swap(s[i],s[st]);
+        }
+    }
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    
+        string s;
+        cin>>s;
+        sort(s.begin(),s.end());
+       permut(s,0,s.length()-1);
+        cout<<endl;
+    }
+}----------------------------------------------
+with stl:
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    
+        string s;
+        cin>>s;
+        sort(s.begin(),s.end());
+        do{
+            cout<<s<<" ";
+            
+        }while(next_permutation(s.begin(),s.end()));
+        cout<<endl;
+    }
+}
