@@ -1,0 +1,39 @@
+BFS:
+#include<queue>
+void bfs(int s, vector<int> adj[], bool vis[])
+{
+    // Your code here
+    memset(vis,false,sizeof(vis));
+    queue<int>q;
+    q.push(s);
+    vis[s]=true;
+    while(q.size())
+    {
+        int x=q.front();
+        q.pop();
+        cout<<x<<" ";
+        for(auto i=adj[x].begin();i!=adj[x].end();i++)
+        {
+            if(vis[*i]==false)
+        {
+            vis[*i]=true;
+        q.push(*i);
+        }
+            
+            
+        }
+    }
+    
+}
+-----------------------------------------------------------
+DFS:
+A)RECURSIVE:
+void dfs(int s, vector<int> g[], bool vis[])
+{
+    vis[s]=true;
+    cout<<s<<" ";
+    for(auto i=g[s].begin();i!=g[s].end();i++)
+    if(vis[*i]==false)
+    dfs(*i,g,vis);
+    
+}
