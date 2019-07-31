@@ -1,0 +1,41 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+#include<string>
+using namespace std;
+string eval(string s,string t)
+{
+    string ne="";
+    int p=s.length()<t.length()?s.length():t.length();
+    for(int i=0;i<p;i++)
+    {
+        if(s[i]!=t[i])
+        break;
+        ne=ne+s[i];
+    }
+    return ne;
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    int e;
+    cin>>e;
+    string s[e];
+    for(int i=0;i<e;i++)
+    {
+        cin>>s[i];
+    }
+    string pre=s[0];
+    for(int i=1;i<e;i++)
+    {
+        pre=eval(pre,s[i]);
+    }
+    if(pre!="")
+    cout<<pre<<endl;
+    else
+    cout<<-1<<endl;
+    }
+}
