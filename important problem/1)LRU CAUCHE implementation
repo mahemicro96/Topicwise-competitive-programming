@@ -1,0 +1,59 @@
+/*The structure of the class is as follows 
+class LRUCache
+{
+public:
+    LRUCache(int );
+    int get(int );
+    void set(int , int );
+};*/
+/*You are required to complete below methods */
+/*Inititalize an LRU cache with size N */
+int n;
+map <int,int> m;
+deque <int> q;
+LRUCache::LRUCache(int N)
+{
+     //Your code here
+     m.clear();
+     q.clear();
+     n=N;
+}
+/*Sets the key x with value y in the LRU cache */
+void LRUCache::set(int x, int y) 
+{
+     //Your code here
+     if(m.find(x)==m.end()){
+         if(q.size()==n){
+             int k = q.back();
+             q.pop_back();
+             m.erase(k);
+         }
+     }
+     else
+     {
+         auto itr = q.begin();
+         while(*itr!=x)
+            itr++;
+        q.erase(itr);
+        m.erase(x);
+     }
+     q.push_front(x);
+     m[x]=y;
+}
+/*Returns the value of the key x if 
+present else returns -1 */
+int LRUCache::get(int x)
+{
+    //Your code here
+    if(m.find(x)==m.end())
+        return -1;
+    else{
+    auto itr = q.begin();
+    while(*itr!=x){
+        itr++;
+    }
+    q.erase(itr);
+    q.push_front(x);
+    return m[x];
+    }
+}
