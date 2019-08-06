@@ -1,0 +1,70 @@
+#include<iostream>
+#include<vector>
+#include<stack>
+#include<algorithm>
+using namespace std;
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    string s;
+    cin>>s;
+    stack<int>st;
+    int j=1;
+    st.push(j);
+    for(int i=0;i<s.length();i++)
+    {
+        if(s[i]=='I')
+        {
+            while(!st.empty())
+            {
+                cout<<st.top();
+                st.pop();
+            }
+            st.push(++j);
+        }
+        if(s[i]=='D')
+        {
+            st.push(++j);
+        }
+    }
+    while(!st.empty())
+            {
+                cout<<st.top();
+                st.pop();
+            }
+            cout<<endl;
+        
+    }
+}
+------------------------------------------
+method:2
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string s;
+	    cin>>s;
+	    stack<int> st;
+	    int n = s.length();
+	    string res="";
+	    for(int i=0;i<=n;i++)
+	    {
+	        st.push(i+1);
+	        if(i==n || s[i]=='I')
+	        {
+	            while(!st.empty())
+	            {
+	                res.append(to_string(st.top()));
+	                st.pop();
+	            }
+	        }
+	    }
+	    cout<<res<<"\n";
+	}
+	return 0;
+}
