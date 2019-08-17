@@ -1,0 +1,116 @@
+method:1
+Using level order traversal
+
+#include<iostream>
+#include<queue>
+using namespace std;
+struct bt{
+  
+	int data;
+	bt *right;
+	bt *left;
+	bt *btinsert(int k)
+	{
+		bt *temp=new bt;
+		temp->data=k;
+		temp->right=temp->left=NULL;
+		return temp;
+	}
+};
+void inorder(bt *root)
+{
+	if(root)
+	{
+	    
+		if(root->left)
+		inorder(root->left);
+		cout<<root->data<<" ";
+		if(root->right)
+		inorder(root->right);
+	}
+}
+void insert(bt *root,int e)
+{ 
+    struct bt m;
+    queue<bt*>q;
+    q.push(root);
+    while(q.size())
+    {
+        bt *temp=q.front();
+        q.pop();
+        if(!temp->left)
+        {
+            temp->left=m.btinsert(e);
+            return;
+        }
+        if(temp->left)
+        q.push(temp->left);
+         if(!temp->right)
+        {
+            temp->right=m.btinsert(e);
+            return;
+        }
+        if(temp->right)
+        q.push(temp->right);
+    }
+    
+}
+void ddelete(bt* &root)
+{
+    if(root==NULL)
+    return;
+    queue<bt*>q;
+    q.push(root);
+    while(q.size())
+    {
+        bt* temp=q.front();
+        q.pop();
+        if(temp->left)
+        q.push(temp->left);
+        if(temp->right)
+        q.push(temp->right);
+        free(temp);
+    }
+    	root=NULL;
+}
+int main()
+{
+	struct bt k;
+	struct bt *root;
+	root=k.btinsert(1);
+	root->left=k.btinsert(2);
+	root->right=k.btinsert(3);
+	root->left->left=k.btinsert(4);
+	root->left->right=k.btinsert(5);
+	inorder(root);
+	cout<<endl;
+	insert(root,7);
+		insert(root,8);
+			insert(root,9);
+	inorder(root);
+	cout<<endl;
+	ddelete(root);
+
+	inorder(root);
+return 1;	
+}
+	----------------------------------------
+  method:2
+Using postorder traversal with recusion 
+
+void ddelete(bt* &root)
+{
+    // Base case: empty tree
+    if (root == nullptr)
+        return;
+
+    // delete left and right subtree first (Postorder)
+    ddelete(root->left);
+    ddelete(root->right);
+
+    // After deleting left and right sub-tree, delete the current node
+    free(root);
+
+    // set root as NULL before returning
+    root = nullptr;
+}
