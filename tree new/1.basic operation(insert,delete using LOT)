@@ -1,4 +1,5 @@
 /*
+LOT-LEVEL ORDER TRAVERSAL
 Algorithm for deletion
 1. Starting at root, find the deepest and rightmost node in binary tree and node which we want to delete.
 2. Replace the deepest rightmost node’s data with node to be deleted.
