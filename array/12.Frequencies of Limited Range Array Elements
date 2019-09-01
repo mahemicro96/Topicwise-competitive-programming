@@ -1,0 +1,24 @@
+Given an array A[] of N positive integers which can contain integers from 1 to N 
+where elements can be repeated or can be absent from the array. 
+Your task is to count frequency of all elements from 1 to N.
+
+
+void printfrequency(int arr[], int n)
+{ 
+	// Your code herre
+	//int k=*max_element(arr,arr+n);
+	
+	for(int i=0;i<n;i++)
+	{
+	    arr[i]--;
+	}
+	for(int i=0;i<n;i++)
+	{
+	    arr[arr[i]%n]=arr[arr[i]%n]+n;
+	}
+	for(int i=0;i<n;i++)
+	{
+	    cout<<arr[i]/n<<" ";
+	}
+	//cout<<(arr[n-1]/n)+1;
+} 
