@@ -1,0 +1,26 @@
+int maxOccured(int L[], int R[], int n, int maxx){
+    // Your code here
+    
+    int arr[maxx+1]={0}; 
+    for(int i=0;i<n;i++) 
+    { 
+
+        arr[L[i]]=arr[L[i]]+1;
+
+        arr[R[i]+1]=arr[R[i]+1]-1;
+
+    } 
+    int max=arr[0],ele=0; 
+    for(int i=1;i<maxx+1;i++) 
+    { 
+        arr[i]=arr[i]+arr[i-1]; 
+        if(arr[i]>max) 
+        { 
+            max=arr[i]; 
+            ele=i; 
+        } 
+    } 
+    return ele; 
+
+} 
+    
