@@ -1,0 +1,62 @@
+Node *removeDuplicates(Node *root)
+{
+ // your code goes here
+ 
+ set<int>s;
+ s.insert(root->data);
+ 
+ vector<int>l;
+ l.push_back(root->data);
+ root=root->next;
+ while(root)
+ {
+     if(s.find(root->data)==s.end())
+     {
+         //cout<<root->data<<" ";
+         s.insert(root->data);
+     l.push_back(root->data);
+     }
+     root=root->next;
+ }
+ int i=l[0];
+  Node *p=new Node(i);
+  Node *q=p;
+ for(int i=1;i!=l.size();i++)
+ {
+     Node *temp=new Node(l[i]);
+     p->next=temp;
+     p=temp;
+     
+ }
+ return q;
+ 
+}--------------------------------------
+GOOD APPROACH:
+Node *removeDuplicates(Node *root)
+{
+ // your code goes here
+ 
+ set<int>s;
+ s.insert(root->data);
+  Node *t=root;
+  Node *p=t;
+ root=root->next;
+ while(root)
+ {
+     if(s.find(root->data)!=s.end())
+     {
+          t->next=root->next;
+        
+        
+     }
+     else
+     {
+         s.insert(root->data);
+          
+         t=root;
+         
+     }
+      root=t->next;
+ }
+return p;
+}
