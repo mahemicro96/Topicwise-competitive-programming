@@ -1,0 +1,22 @@
+void removeTheLoop(Node *head)
+{
+     set<Node*>s;
+     Node *prev=NULL;
+     while(head)
+     {
+        if(s.find(head)==s.end())
+        {
+            s.insert(head);
+            prev=head;
+            head=head->next;
+        }
+        else
+        break;
+     }
+     if(!head)
+     return;
+     else
+     {
+         prev->next=NULL;
+     }
+}
