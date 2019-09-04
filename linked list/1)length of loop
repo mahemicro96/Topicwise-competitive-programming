@@ -1,36 +1,27 @@
 int countNodesinLoop(struct Node *head)
 {
      // Code here
-     #include<vector>
-     vector<Node*>v;
-     v.push_back(head);
-    
-     while(head->next)
+     set<Node*>s;
+     while(head)
      {
-         if(find(v.begin(),v.end(),head->next)==v.end())
-         {
-             v.push_back(head);
-             head=head->next;
-         }
+         if(s.find(head)==s.end())
+         s.insert(head);
          else
-         {
-             break;
-         }
-         
+         break;
+         head=head->next;
      }
-     if(head->next==NULL)
+     if(!head)
      return 0;
      else
      {
          Node *p=head->next;
          head->next=NULL;
          int c=0;
-         while(p)
-         {
-             c++;
-             p=p->next;
-         }
-         return c;
+     while(p)
+     {
+         c++;
+         p=p->next;
      }
-     
+     return c;
+     }
 }
