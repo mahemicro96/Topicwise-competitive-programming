@@ -47,7 +47,7 @@ Node *removeDuplicates(Node *root)
      {
           t->next=root->next;
         
-        
+        delete root;
      }
      else
      {
