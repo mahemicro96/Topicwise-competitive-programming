@@ -1,0 +1,25 @@
+method:using map
+void getVerticalOrder(Node* root, int hd, map<int, vector<int>> &m) 
+{ 
+    // Base case 
+    if (root == NULL) 
+        return; 
+    m[hd].push_back(root->data); 
+    getVerticalOrder(root->left, hd-1, m); 
+    getVerticalOrder(root->right, hd+1, m); 
+} 
+void verticalOrder(Node *root)
+{
+    map < int,vector<int> > m; 
+    int hd = 0; 
+    getVerticalOrder(root, hd,m); 
+    map< int,vector<int> > :: iterator it; 
+    for (it=m.begin(); it!=m.end(); it++) 
+    { 
+        //for make vector value in decinding order
+        sort(it->second.begin(),it->second.end(),greater<int>());
+        for (int i=0; i<it->second.size(); ++i) 
+            cout << it->second[i] << " "; 
+        //cout << endl; 
+    } 
+}
