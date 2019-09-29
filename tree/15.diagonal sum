@@ -1,0 +1,34 @@
+void diagonalSumUtil(struct Node* root, 
+                int vd, map<int, int> &diagonalSum) 
+{ 
+    if(!root) 
+        return; 
+          
+    diagonalSum[vd] += root->data; 
+  
+    // increase the vertical distance if left child 
+    diagonalSumUtil(root->left, vd + 1, diagonalSum); 
+  
+    // vertical distance remains same for right child 
+    diagonalSumUtil(root->right, vd, diagonalSum); 
+} 
+  
+// Function to calculate diagonal  
+// sum of given binary tree 
+void diagonalSum(struct Node* root) 
+{ 
+  
+    // create a map to store Diagonal Sum 
+    map<int, int> diagonalSum;  
+      
+    diagonalSumUtil(root, 0, diagonalSum); 
+  
+    map<int, int>::iterator it; 
+        cout << "Diagonal sum in a binary tree is - "; 
+      
+    for(it = diagonalSum.begin(); 
+                it != diagonalSum.end(); ++it) 
+    { 
+        cout << it->second << " "; 
+    } 
+} 
