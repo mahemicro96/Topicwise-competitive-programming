@@ -1,0 +1,26 @@
+void topView(struct Node *root)
+{
+    map<int,vector<int>>m;
+    queue<pair<Node*,int>>q;
+    int h=0;
+    q.push(make_pair(root,h));
+    while(q.size())
+    {
+        pair<Node*,int>t=q.front();
+        q.pop();
+        Node *p=t.first;
+        int k=t.second;
+        m[k].push_back(p->data);
+        if(p->left)
+        q.push(make_pair(p->left,k-1));
+        if(p->right)
+        q.push(make_pair(p->right,k+1));
+        
+    }
+    for(auto i=m.begin();i!=m.end();i++)
+        cout<<i->second[0]<<" ";//top view
+        /*bottom view:
+        cout<<i->second[i->second.size()-1]<<" ";
+        */
+        
+}
