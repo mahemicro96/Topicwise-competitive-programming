@@ -1,3 +1,5 @@
+method:1(using level,vertical) for top ,bottom view
+--------------------------------------------------------
 void topView(struct Node *root)
 {
     map<int,vector<int>>m;
@@ -28,7 +30,8 @@ void topView(struct Node *root)
         */
         
 }
-method 2:(using preorder traversal) for bottom view
+method 2:(using preorder,vertical traversal) for bottom view
+------------------------------------------------------------
 map<int,vector<int>>m;
 void fill(Node *root,int i)
 {
