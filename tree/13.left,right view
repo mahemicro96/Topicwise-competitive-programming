@@ -1,0 +1,49 @@
+void leftView(Node * root) {
+  // Your code here
+  queue < Node * > q;
+  q.push(root);
+  while (q.size()) {
+    int k = q.size();
+    int f = 1;
+    while (k--) {
+      Node * p = q.front();
+      q.pop();
+      if (f == 1)
+        cout << p - > data << " ";
+      f = 0;
+      if (p - > left)
+        q.push(p - > left);
+      if (p - > right)
+        q.push(p - > right);
+    }
+
+  }
+}
+
+right view:
+--------------
+void rightView(Node *root)
+{
+  queue < Node * > q;
+  q.push(root);
+  while (q.size()) {
+    int k = q.size();
+    //cout<<"si="<<k;
+     Node * p;
+    while (k--) {
+       p = q.front();
+      q.pop();
+
+      if (p-> left)
+        q.push(p-> left);
+      if (p-> right)
+        q.push(p-> right);
+        
+    }
+    cout<<p->data<<" ";
+
+
+  }
+}
+
+
