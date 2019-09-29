@@ -20,7 +20,11 @@ void topView(struct Node *root)
     for(auto i=m.begin();i!=m.end();i++)
         cout<<i->second[0]<<" ";//top view
         /*bottom view:
-        cout<<i->second[i->second.size()-1]<<" ";
+        for(auto i=m.begin();i!=m.end();i++)
+    {
+        int u=i->second.size();
+        cout<<i->second[u-1]<<" ";
+    }
         */
         
 }
