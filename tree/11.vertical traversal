@@ -1,4 +1,10 @@
-method:using map
+method:using map and preorder traversal
+NOTE:here the program for vertical traversal left to right.if we need verical 
+traversal right to left we need to pass:
+getVerticalOrder(root->left, hd+1, m); 
+getVerticalOrder(root->right, hd-1, m); 
+
+
 void getVerticalOrder(Node* root, int hd, map<int, vector<int>> &m) 
 { 
     // Base case 
@@ -24,35 +30,31 @@ void verticalOrder(Node *root)
     } 
 }
 
-using level order:
-void printVerticalOrder(Node * root) {
-  // Base case 
-  if (!root)
-    return;
+using map and level order:
+--------------------------
 
-  map < int, vector < int > > m;
-  int hd = 0;
-  queue < pair < Node * , int > > que;
-  que.push(make_pair(root, hd));
+NOTE:here the program for vertical traversal left to right.if we need verical 
+traversal right to left we need to pass:
+q.push(make_pair(k+1, p - > left));q.push(make_pair(k-1, p - > right));
 
-  while (!que.empty()) {
-
-    pair < Node * , int > temp = que.front();
-    que.pop();
-    hd = temp.second;
-    Node * node = temp.first;
-    m[hd].push_back(node - > key);
-
-    if (node - > left != NULL)
-      que.push(make_pair(node - > left, hd - 1));
-    if (node - > right != NULL)
-      que.push(make_pair(node - > right, hd + 1));
-  }
-
-  map < int, vector < int > > ::iterator it;
-  for (it = m.begin(); it != m.end(); it++) {
-    for (int i = 0; i < it - > second.size(); ++i)
-      cout << it - > second[i] << " ";
-    cout << endl;
-  }
+void verticalOrder(Node * root) {
+   map < int, vector < int > > m;
+   int hd = 0;
+   queue < pair < int, Node * >> q;
+   q.push(make_pair(hd, root));
+   while (q.size()) {
+      pair < int, Node * > t = q.front();
+      int k = t.first;
+      Node * p = t.second;
+      q.pop();
+      m[k].push_back(p - > data);
+      if (p - > left)
+         q.push(make_pair(k - 1, p - > left));
+      if (p - > right)
+         q.push(make_pair(k + 1, p - > right));
+   }
+   for (auto i = m.begin(); i != m.end(); i++) {
+      for (int j = 0; j < i - > second.size(); j++)
+         cout << i - > second[j] << " ";
+   }
 }
