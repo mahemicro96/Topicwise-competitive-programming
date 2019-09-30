@@ -4,7 +4,7 @@ int height(Tree *root)
     if(root==NULL)
     {
         return 0;//geeks
-       // return 1;hacker rank
+       // return -1;hacker rank
     }
     else
     {
@@ -16,6 +16,9 @@ int height(Tree *root)
         return righth+1;
     }
 }
+Note:
+height of one node:1(in geeks)
+height of one node:0(in hacker rank)
 -----------------------------------------------
 Tree *search(Tree *root,int x)
 {
