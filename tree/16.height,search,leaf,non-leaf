@@ -1,0 +1,61 @@
+int height(Tree *root)
+{
+    int lefth,righth;
+    if(root==NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        lefth=height(root->left);
+        righth=height(root->right);
+        if(lefth>righth)
+        return lefth+1;
+        else
+        return righth+1;
+    }
+}
+-----------------------------------------------
+Tree *search(Tree *root,int x)
+{
+    if(root==NULL)
+    return NULL;
+    else
+    {
+       // cout<<root->data<<" ";
+    if(root->data==x)
+    {
+    return root;
+    }
+     Tree *m=search(root->left,x);
+    Tree *n=search(root->right,x);
+    if(m!=NULL)
+    return m;
+    if(n!=NULL)
+    return n;
+    else return NULL;
+    }
+   
+}
+--------------------------------------------
+int countLeaves(Node* root)
+{
+  // Your code here
+  if(root==NULL)
+  return 0;
+  if(root->left==NULL&&root->right==NULL)
+  return 1;
+  return countLeaves(root->left)+countLeaves(root->right);
+}
+---------------------------------------------------
+int countNonleaf(struct Node* root) 
+{ 
+    
+    if (root == NULL || (root->left == NULL &&  
+                         root->right == NULL)) 
+        return 0; 
+  
+   
+    return 1 + countNonleaf(root->left) +  
+               countNonleaf(root->right); 
+} 
