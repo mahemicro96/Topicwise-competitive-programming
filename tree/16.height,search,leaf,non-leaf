@@ -3,7 +3,8 @@ int height(Tree *root)
     int lefth,righth;
     if(root==NULL)
     {
-        return 0;
+        return 0;//geeks
+       // return 1;hacker rank
     }
     else
     {
