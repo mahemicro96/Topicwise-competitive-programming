@@ -41,11 +41,12 @@ Tree *search(Tree *root,int x)
 int countLeaves(Node* root)
 {
   // Your code here
-  if(root==NULL)
-  return 0;
-  if(root->left==NULL&&root->right==NULL)
-  return 1;
-  return countLeaves(root->left)+countLeaves(root->right);
+ if(root)
+  {
+      if(root->left==NULL&&root->right==NULL)
+      return 1;
+      return countLeaves(root->left)+countLeaves(root->right);
+  }
 }
 ---------------------------------------------------
 int countNonleaf(struct Node* root) 
@@ -59,3 +60,52 @@ int countNonleaf(struct Node* root)
     return 1 + countNonleaf(root->left) +  
                countNonleaf(root->right); 
 } 
+-------------------------------------------------------
+best approach(understandable approach)
+for count leaf :
+***************
+void count(Node* root,int &c)
+   {
+       if(root)
+       {
+           if(root->left==NULL && root->right==NULL)
+           c++;
+           if(root->left)
+           count(root->left,c);
+           if(root->right)
+           count(root->right,c);
+       }
+   }
+int countLeaves(Node* root)
+{
+  // Your code here
+  int c=0;
+  count(root,c);
+  return c;
+}
+
+for count non-leaf:
+*******************
+void count1(Node *root,int &c)
+{
+    if(root)
+    {
+        if(root->left||root->right)
+         c++;
+        if(root->left)
+        count1(root->left,c);
+        if(root->right)
+        count1(root->right,c);
+        
+        
+    }
+}
+int countNonLeafNodes(Node* root)
+{
+    // Code here
+    int c=0;
+    count1(root,c);
+    return c;
+    
+}
+------------------------------
