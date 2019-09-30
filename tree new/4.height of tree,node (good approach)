@@ -38,15 +38,22 @@ int height(Tree *root)
 }
 Tree *search(Tree *root,int x)
 {
-    if(root)
+    if(root==NULL)
+    return NULL;
+    else
     {
        // cout<<root->data<<" ";
     if(root->data==x)
     {
     return root;
     }
-     search(root->left,x);
-    search(root->right,x);
+     Tree *m=search(root->left,x);
+    Tree *n=search(root->right,x);
+    if(m!=NULL)
+    return m;
+    if(n!=NULL)
+    return n;
+    else return NULL;
     }
    
 }
