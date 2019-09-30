@@ -17,15 +17,7 @@ int getSize(Node* node)
 }
 -----------------------------------
 Count full nodes in a Binary tree:
-full nodes (Nodes which have both children as not NULL)
-The idea is to use level-order traversal to solve this problem efficiently.
 
-1) Create an empty Queue Node and push root node to Queue.
-2) Do following while nodeQeue is not empty.
-   a) Pop an item from Queue and process it.
-      a.1) If it is full node then increment count++.
-   b) Push left child of popped item to Queue, if available.
-   c) Push right child of popped item to Queue, if available.
  unsigned int getfullCount(struct Node* node) 
 { 
     // If tree is empty 
@@ -55,15 +47,7 @@ The idea is to use level-order traversal to solve this problem efficiently.
 Count half nodes in a Binary tree :
  half nodes (which has only one child)
  
- The idea is to use level-order traversal to solve this problem efficiently.
-
-1) Create an empty Queue Node and push root node to Queue.
-2) Do following while nodeQeue is not empty.
-   a) Pop an item from Queue and process it.
-      a.1) If it is half node then increment count++.
-   b) Push left child of popped item to Queue, if available.
-   c) Push right child of popped item to Queue, if available.
-   
+ 
  unsigned int gethalfCount(struct Node* node) 
 { 
     // If tree is empty 
