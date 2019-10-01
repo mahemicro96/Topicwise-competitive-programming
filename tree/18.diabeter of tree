@@ -1,0 +1,80 @@
+good approach but time complexity:o(n^2)
+-------------------------------------------
+int height(Node *root)
+{
+    if(root==NULL)
+    return 0;
+    int lh=height(root->left);
+    int rh=height(root->right);
+    return 1+max(lh,rh);
+}
+  
+/* Computes the diameter of binary tree with given root. */
+int diameter(Node* root) 
+{ 
+    if(root==NULL)
+    return 0;
+    
+   int lheight=height(root->left);
+   int rheight=height(root->right);
+   //cout<<lheight<<" "<<rheight;
+   int h=lheight+rheight+1;
+    int ld = diameter(root->left); 
+  int rd = diameter(root->right); 
+  int d=max(ld,rd);
+  return max(d,h);
+} 
+---------------------------------------------
+time complexity:o(n):(here diameter find for each node)
+int height(Node* root, int& ans) 
+{ 
+    if (root == NULL) 
+        return 0; 
+  
+    int left_height = height(root->left, ans); 
+  
+    int right_height = height(root->right, ans); 
+  
+    // update the answer, because diameter of a 
+    // tree is nothing but maximum value of 
+    // (left_height + right_height + 1) for each node 
+    ans = max(ans, 1 + left_height + right_height); 
+  
+    return 1 + max(left_height, right_height); 
+} 
+  
+/* Computes the diameter of binary tree with given root. */
+int diameter(Node* root) 
+{ 
+    if (root == NULL) 
+        return 0; 
+    int ans = INT_MIN; // This will store the final answer 
+    int height_of_tree = height(root, ans); 
+    return ans; 
+} 
+-----------------------------------------------------
+doubt
+*****
+i understand diameter is maximum height of left subtre+maximum height of right subtree+1(for root node)
+int height(Node *root)
+{
+    if(root==NULL)
+    return 0;
+    int lh=height(root->left);
+    int rh=height(root->right);
+    return 1+max(lh,rh);
+}
+  
+/* Computes the diameter of binary tree with given root. */
+int diameter(Node* root) 
+{ 
+    if(root==NULL)
+    return 0;
+    
+   int lheight=height(root->left);
+   int rheight=height(root->right);
+   
+  return lheight+rheight+1;
+} 
+but it's fail in some test case of geeks.....why?
+  
