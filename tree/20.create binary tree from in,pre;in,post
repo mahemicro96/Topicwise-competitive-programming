@@ -1,0 +1,51 @@
+a)inorder traversal,preorder traversal given
+-------------------
+Node* construct(int start, int end,int preorder[],
+				int &pIndex, unordered_map<int,int>&map)
+{
+	if (start > end)
+	return nullptr;
+	int t=preorder[pIndex++];
+	Node *root = new Node(t);
+	int index = map[root->data];
+	root->left = construct(start, index - 1, preorder, pIndex, map);
+	root->right = construct(index + 1, end, preorder, pIndex, map);
+	return root;
+}
+
+
+
+Node* buildTree(int inorder[],int preorder[], int inStrt, int inEnd)
+{
+	unordered_map<int,int> map;
+	for (int i = 0; i <= inEnd; i++)
+		map[inorder[i]] = i;
+	int pIndex = 0;
+	return construct(0, inEnd, preorder, pIndex, map);
+}
+----------------------------------------
+b)inorder traversal,postorder traversal given
+------------
+Node* construct(int start, int end,int preorder[],
+				int &pIndex, unordered_map<int,int>&map)
+{
+	if (start > end)
+	return nullptr;
+	int t=preorder[pIndex--];
+	Node *root = new Node(t);
+	int index = map[root->data];
+	root->right = construct(index + 1, end, preorder, pIndex, map);
+	root->left = construct(start, index - 1, preorder, pIndex, map);
+	return root;
+}
+
+
+
+Node* buildTree(int inorder[],int preorder[], int inStrt, int inEnd)
+{
+	unordered_map<int,int> map;
+	for (int i = 0; i <= inEnd; i++)
+		map[inorder[i]] = i;
+	int pIndex = inEnd;
+	return construct(0, inEnd, preorder, pIndex, map);
+}
