@@ -1,0 +1,182 @@
+a)self(a tree is mirror of itself):
+recursive:
+--------------
+bool check(Node *r1,Node *r2)
+{
+    if(r1==NULL&&r2==NULL)
+    return 1;
+    if(r1==NULL||r2==NULL)
+    return 0;
+    if(r1->key!=r2->key)
+    return 0;
+    return check(r1->left,r2->right)&&check(r1->right,r2->left);
+}
+bool isSymmetric(struct Node* root)
+{
+	// Code here
+	return check(root->left,root->right);
+}
+non_recursive:
+-------
+bool isSymmetric(struct Node* root) 
+{ 
+    if(root == NULL) 
+        return true; 
+      
+    // If it is a single tree node, then  
+    // it is a symmetric tree. 
+    if(!root->left && !root->right) 
+        return true; 
+      
+    queue <Node*> q; 
+      
+    // Add root to queue two times so that 
+    // it can be checked if either one child 
+    // alone is NULL or not. 
+    q.push(root); 
+    q.push(root); 
+      
+    // To store two nodes for checking their 
+    // symmetry. 
+    Node* leftNode, *rightNode; 
+      
+    while(!q.empty()){ 
+          
+        // Remove first two nodes to check 
+        // their symmetry. 
+        leftNode = q.front(); 
+        q.pop(); 
+          
+        rightNode = q.front(); 
+        q.pop(); 
+          
+        // if both left and right nodes  
+        // exist, but have different  
+        // values--> inequality, return false 
+        if(leftNode->key != rightNode->key){ 
+        return false; 
+        } 
+          
+        // Push left child of left subtree node 
+        // and right child of right subtree 
+        // node in queue. 
+        if(leftNode->left && rightNode->right){ 
+            q.push(leftNode->left); 
+            q.push(rightNode->right); 
+        } 
+          
+        // If only one child is present alone 
+        // and other is NULL, then tree  
+        // is not symmetric. 
+        else if (leftNode->left || rightNode->right) 
+        return false; 
+          
+        // Push right child of left subtree node 
+        // and left child of right subtree node 
+        // in queue. 
+        if(leftNode->right && rightNode->left){ 
+            q.push(leftNode->right); 
+            q.push(rightNode->left); 
+        } 
+          
+        // If only one child is present alone 
+        // and other is NULL, then tree  
+        // is not symmetric.  
+        else if(leftNode->right || rightNode->left) 
+        return false; 
+    } 
+      
+    return true; 
+} 
+  ---------------------------------------------------------------------------
+  b)b/w 2 tree:
+  recursive:
+  int areMirror(Node* a, Node* b) 
+{ 
+    /* Base case : Both empty */
+    if (a==NULL && b==NULL) 
+        return true; 
+  
+    // If only one is empty 
+    if (a==NULL || b == NULL) 
+        return false; 
+  
+    
+     if(a->data != b->data)
+     return 0; 
+            return areMirror(a->left, b->right) &&areMirror(a->right, b->left); 
+} 
+
+Non_recursive:
+string areMirrors(Node *root1, Node *root2) 
+{ 
+    stack<Node*> st1, st2; 
+    while (1) 
+    { 
+        // iterative inorder traversal of 1st tree and 
+        // reverse inoder traversal of 2nd tree 
+        while (root1 && root2) 
+        { 
+            // if the corresponding nodes in the two traversal 
+            // have different data values, then they are not 
+            // mirrors of each other. 
+            if (root1->data != root2->data) 
+                return "No"; 
+                  
+            st1.push(root1); 
+            st2.push(root2); 
+            root1 = root1->left; 
+            root2 = root2->right;     
+        } 
+          
+        // if at any point one root becomes null and 
+        // the other root is not null, then they are  
+        // not mirrors. This condition verifies that 
+        // structures of tree are mirrors of each other. 
+        if (!(root1 == NULL && root2 == NULL)) 
+            return "No"; 
+              
+        if (!st1.empty() && !st2.empty()) 
+        { 
+            root1 = st1.top(); 
+            root2 = st2.top(); 
+            st1.pop();  
+            st2.pop(); 
+              
+            /* we have visited the node and its left subtree. 
+               Now, it's right subtree's turn */
+            root1 = root1->right; 
+              
+            /* we have visited the node and its right subtree. 
+               Now, it's left subtree's turn */
+            root2 = root2->left; 
+        }     
+          
+        // both the trees have been completely traversed 
+        else
+            break; 
+    } 
+      
+    // tress are mirrors of each other 
+    return "Yes"; 
+} 
+  ------------------------------------------------------------
+  convert to mirror of a tree:
+  void mirror(struct Node* node)  
+{ 
+    if (node == NULL)  
+        return;  
+    else
+    { 
+        struct Node* temp; 
+          
+        /* do the subtrees */
+        mirror(node->left); 
+        mirror(node->right); 
+      
+        /* swap the pointers in this node */
+        temp     = node->left; 
+        node->left = node->right; 
+        node->right = temp; 
+    } 
+}  
