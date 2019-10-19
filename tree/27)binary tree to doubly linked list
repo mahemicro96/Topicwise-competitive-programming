@@ -1,0 +1,37 @@
+ void bToDLL(Node *root, Node **head_ref)
+{
+    if(root == NULL)
+    return;
+    static Node* pr=NULL;
+    bToDLL ( root->left , head_ref);
+    if(pr==NULL)
+    *head_ref=root;
+    else
+    {
+        root->left=pr;
+        pr->right=root;
+    }
+    pr=root;
+    bToDLL(root->right,head_ref);
+}
+
+--------------------------------------------
+ void bToDLL(Node *root, Node **head_ref)
+{
+    if(root == NULL)
+    return;
+    
+    bToDLL ( root->right , head_ref);
+    
+    root->right = * head_ref;
+    
+    if(*head_ref !=NULL)
+    {
+        (*head_ref)->left = root;
+    }
+     
+     *head_ref = root;
+    
+    bToDLL(root->left,head_ref);
+}
+
