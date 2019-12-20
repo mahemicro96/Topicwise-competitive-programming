@@ -1,0 +1,38 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+#include<climits>
+using namespace std;
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    int m;
+    cin>>m;
+    vector<int>v(m);
+    for(int i=0;i<m;i++)
+    cin>>v[i];
+    int f=INT_MAX;
+    int s=INT_MAX;
+    for(int i=0;i<m;i++)
+    {
+        if(v[i]<f)
+        {
+            s=f;
+            f=v[i];
+        }
+        else if(v[i]<s&&v[i]!=f)
+        {
+            s=v[i];
+        }
+       
+    }
+     if(f!=s && s!=INT_MAX)
+        cout<<f<<" "<<s<<endl;
+        else
+        cout<<-1<<endl;
+        
+    }
+}
