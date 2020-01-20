@@ -1,0 +1,42 @@
+#include<iostream>
+#include<vector>
+#include<set>
+#include<algorithm>
+using namespace std;
+string func(vector<int>v,int x)
+{
+     set<int>s;
+     int l;
+     for(int i=0;i<v.size();i++)
+     {
+        if(s.find(v[i])!=s.end())
+        {
+            //cout<<abs(x-v[i])<<","<<v[i]<<endl;
+        return "Yes";
+        }
+        else
+        {
+        l=x-v[i];
+        if(l>0)
+        s.insert(l);
+        }
+     }
+     return "No";
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+        int m,x;
+        cin>>m>>x;
+        vector<int>v(m);
+        for(int i=0;i<m;i++)
+        cin>>v[i];
+       
+        string s=func(v,x);
+        cout<<s<<endl;
+    
+        
+    }
+}
