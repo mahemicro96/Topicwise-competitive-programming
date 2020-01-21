@@ -1,0 +1,71 @@
+using python:
+def maxProduct(a):
+    pre_max=a[0]
+    pre_min=a[0]
+    max1=a[0]
+    for i in range(1,len(a)):
+        cur_max=max(pre_max*a[i],pre_min*a[i],a[i])
+        cur_min=min(pre_max*a[i],pre_min*a[i],a[i])
+        max1=max(cur_max,max1)
+        pre_max=cur_max
+        pre_min=cur_min
+    return max1
+def main():
+    from sys import stdin, stdout
+    x=int(stdin.readline())
+    for i in range(x):
+        y=int(stdin.readline())
+        l=list(map(int,stdin.readline().split()))
+        l=list(map(int,l))
+        print(maxProduct(l))
+if __name__ == "__main__":
+    main()
+#l=list(map(int,input().split())
+---------------------------------------------
+using c++:
+------
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+bool comp(long long int a,long long int b)
+{
+    return a<b;
+}
+bool comp1(long long int a,long long int b)
+{
+    return a<b;
+}
+long long int func(vector<long long int>v)
+{
+    long long int pre_max=v[0];
+    long long int pre_min=v[0];
+    long long int max1=v[0],m,n,p;
+    long long int cur_max,cur_min;
+    for(int i=1;i<v.size();i++)
+    {
+        m=v[i]*pre_max;
+        n=v[i]*pre_min;
+        cur_max=max({m,n,v[i]},comp);
+        cur_min=min({m,n,v[i]},comp1);
+        max1=max(cur_max,max1);
+        pre_max=cur_max;
+        pre_min=cur_min;
+    }
+    return max1;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    while(n--)
+    {
+        int x;
+        cin>>x;
+        vector<long long int>v(x);
+        for(int i=0;i<x;i++)
+        cin>>v[i];
+        cout<<func(v)<<endl;
+        
+    }
+}
