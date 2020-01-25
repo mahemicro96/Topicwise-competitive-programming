@@ -1,0 +1,41 @@
+method1:
+moore's voting algo
+o(n) with no extra space
+
+
+
+method2:
+----------
+#include<iostream>
+#include<vector>
+#include<map>
+#include<algorithm>
+using namespace std;
+bool comp(pair<int,int>a,pair<int,int>b)
+{
+    return a.second<b.second;
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    int k;
+    cin>>k;
+    map<int,int>m;
+    int t;
+    for(int i=0;i<k;i++)
+    {
+        cin>>t;
+        m[t]++;
+    }
+    auto i=*max_element(m.begin(),m.end(),comp);
+    t=i.second;
+    if(t>k/2)
+    cout<<i.first<<endl;
+    else
+    cout<<-1<<endl;
+    
+        
+    }
+}
