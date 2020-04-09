@@ -40,3 +40,52 @@ main()
         
     }
 }
+-------------------------------------------
+mehtod:2
+#include <iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main() {
+	//code
+	int m;
+	cin>>m;
+	while(m--)
+	{
+	    vector<int>v;
+	    int n,sum;
+	    cin>>n>>sum;
+	    for(auto i=0;i<n;i++)
+	    {
+	        int x;
+	        cin>>x;
+	        v.push_back(x);
+	    }
+	    sort(v.begin(),v.end());
+	    auto i=0;
+	    auto j=v.size()-1;
+	    while(i<j)
+	    {
+	        int csum=v[i]+v[j];
+	        if(csum==sum)
+	        {
+	           cout<<"Yes"<<endl;
+	           break;
+	        }
+	        else if(csum>sum)
+	        {
+	            j--;
+	        }
+	        else{
+	            i++;
+	        }
+	    }
+	    if(i==j)
+	    cout<<"No"<<endl;
+	    
+	}
+	return 0;
+}
+
+
