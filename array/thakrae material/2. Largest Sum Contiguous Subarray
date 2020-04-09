@@ -1,35 +1,76 @@
-#include<iostream>
-#include<vector>
-#include<climits>
+method:1
+#include <iostream>
 #include<algorithm>
+#include<vector>
+#include<bits/stdc++.h>
+#include<climits>
 using namespace std;
-int func(vector<int>v)
+int conti_sum(vector<int>v)
 {
-    int sum1,sum2;
-    sum1=INT_MIN;
-    sum2=0;
+    int cur_sum=v[0];
+    int ovr_sum=v[0];
+    for(int i=1;i<v.size();i++)
+    {
+        cur_sum=max(v[i],cur_sum+v[i]);
+        ovr_sum=max(cur_sum,ovr_sum);
+    }
+    return ovr_sum;
+   
+}
+
+int main() {
+	//code
+	int m;
+	cin>>m;
+	while(m--)
+	{
+	    int n;
+	    cin>>n;
+	    vector<int>v(n);
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>v[i];
+	    }
+	    cout<<conti_sum(v)<<endl;
+	}
+	return 0;
+}
+------------------------------
+method:2
+#include<algorithm>
+#include<vector>
+#include<bits/stdc++.h>
+#include<climits>
+using namespace std;
+int conti_sum(vector<int>v)
+{
+    int cur_sum=0;
+    int ovr_sum=INT_MIN;
     for(int i=0;i<v.size();i++)
     {
-        sum2=sum2+v[i];
-        if(sum2>sum1)
-        sum1=sum2;
-        if(sum2<0)
-        sum2=0;
+        cur_sum=cur_sum+v[i];
+        if(cur_sum>ovr_sum)
+        ovr_sum=cur_sum;
+        if(cur_sum<0)
+        cur_sum=0;
     }
-    return sum1;
+    return ovr_sum;
 }
-main()
-{
-    int n;cin>>n;
-    while(n--)
-    {
-    
-        int m;
-        cin>>m;
-        vector<int>v(m);
-        for(int i=0;i<m;i++)
-        cin>>v[i];
-        int x=func(v);
-        cout<<x<<endl;
-    }
+
+int main() {
+	//code
+	int m;
+	cin>>m;
+	while(m--)
+	{
+	    int n;
+	    cin>>n;
+	    vector<int>v(n);
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>v[i];
+	    }
+	    cout<<conti_sum(v)<<endl;
+	}
+	return 0;
 }
