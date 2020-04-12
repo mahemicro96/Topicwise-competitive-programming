@@ -2,7 +2,54 @@ method1:
 moore's voting algo
 o(n) with no extra space
 
+#include <bits/stdc++.h>
+using namespace std;
+int maj_elem(vector<int>v)
+{
+    int count=1,maj_index=0;
+        for(int i=1;i<v.size();i++ )
+        {
+            if(v[i]==v[maj_index])
+            count++;
+            else
+            count--;
+            if(count==0)
+            {
+                count=1;
+                maj_index=i;
+            }
+        }
+        count=0;
+        for(int i=0;i<v.size();i++)
+        {
+            if(v[i]==v[maj_index])
+            count++;
+        }
+        if(count>(v.size()/2))
+        return v[maj_index];
+        else
+        return -1;
+}
 
+main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n;cin>>n;
+    while(n--)
+    {
+    
+        int p,q;
+        cin>>p;
+        vector<int>v(p);
+        for(int i=0;i<p;i++)
+        cin>>v[i];
+        cout<<maj_elem(v)<<endl;
+        
+       
+    }
+}
+------------------------------------------------------------------------------
 
 method2:
 ----------
