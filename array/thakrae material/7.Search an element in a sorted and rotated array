@@ -1,0 +1,64 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+using namespace std;
+long long pivot(vector<long long>v,long long low,long long high)
+{
+    if(low>high)
+    return -1;
+    if(low==high)
+    return low;
+    long long mid=(low+high)/2;
+    if(mid<high && v[mid]>v[mid+1])
+    return mid;
+    if(mid>low && v[mid]<v[mid-1])
+    return mid-1;
+    if(v[low]>v[mid])
+    return pivot(v,low,mid-1);
+    return pivot(v,mid+1,high);
+    
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+     long long m,s_elem;
+     cin>>m;
+     vector<long long>v(m);
+     for(int i=0;i<m;i++)
+     cin>>v[i];
+     cin>>s_elem;
+     long long x=pivot(v,0,v.size()-1);
+     /*lower_bound() also has o(logn) time complexity.if need index of founded element
+     we can use lower_bound() instead of binary_search()*/
+     if(x==-1)
+     {
+       auto it=lower_bound(v.begin(),v.end(),s_elem);
+         if(it==v.end()||*it!=s_elem)
+         cout<<-1<<endl;
+     }
+     else if(v[x]==s_elem)
+     cout<<x<<endl;
+     else
+     {
+         if(v[0]<=s_elem)
+         {
+         auto it=lower_bound(v.begin(),v.begin()+x-1,s_elem);
+         if(it==v.end()||*it!=s_elem)
+         cout<<-1<<endl;
+         else
+         cout<<it-v.begin()<<endl;}
+         else
+         {
+             auto it=lower_bound(v.begin()+x+1,v.end(),s_elem);
+         if(it==v.end()||*it!=s_elem)
+         cout<<-1<<endl;
+         else
+         cout<<it-v.begin()<<endl;
+         }
+     }
+        
+    }
+}
