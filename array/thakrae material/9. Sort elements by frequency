@@ -2,51 +2,60 @@ Print the elements of an array in the decreasing frequency if 2 numbers have sam
 then print the one which came first.
 
 #include<iostream>
-#include<map>
 #include<vector>
+#include<map>
 #include<algorithm>
 using namespace std;
-struct ele{
-	int x;
-	int ind;
-	int freq=0;
+struct elements{
+    int ele,count1,index;
 };
-bool comp(struct ele x,struct ele y)
+bool comp(elements a,elements b)
 {
-	if(x.freq==y.freq)
-	return x.ind<y.ind;
-	else
-	return x.freq>y.freq;
+    if(a.count1==b.count1)
+    return a.index<b.index;
+    else
+    return a.count1<b.count1;
 }
-
 main()
 {
-	int n;
-	cin>>n;
-	ele y[n];
-		vector<int>v;
-	for(int i=0;i<n;i++)
-	{
-		
-		cin>>y[i].x; 
-		v.push_back(y[i].x);
-			
-	}
-	
-	for(int i=0;i<n;i++)
-	{
-		y[i].freq=count(v.begin(),v.end(),y[i].x);
-	y[i].ind=find(v.begin(),v.end(),y[i].x)-v.begin();
-	
-	}
-	sort(y,y+n,comp);
-	for(int i=0;i<n;i++)
-	cout<<y[i].x<<" "<<y[i].freq<<" "<<y[i].ind<<endl;
-	
+    int n;cin>>n;
+    while(n--)
+    {
+    int x,y;
+    cin>>x;
+    
+    vector<elements>v;
+    vector<int>v1;
+    for(int i=0;i<x;i++)
+    {
+        cin>>y;
+        v1.push_back(y);
+        v.push_back({y,0,i});
+        
+    }
+    for(int i=0;i<x;i++)
+    v[i].count1=count(v1.begin(),v1.end(),v1[i]);
+    
+    sort(v.rbegin(),v.rend(),comp);
+    for(int i=0;i!=x;i++)
+    {
+
+        cout<<v[i].ele<<" "<<v[i].count1<<" "<<v[i].index<<endl;
+    }
+        cout<<endl;
+    }
 }
-
-
 
 input:
 8
 2 5 2 8 5 6 8 8
+output:
+
+8 3 7
+8 3 6
+8 3 3
+5 2 4
+2 2 2
+5 2 1
+2 2 0
+6 1 5
