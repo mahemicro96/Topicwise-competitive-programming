@@ -34,6 +34,7 @@ int partition(int arr[], int left, int right) {
   int i = left, j = right;
   int tmp;
   int pivot = arr[(left + right) / 2];
+  //int pivot=arr[left] //for left as pivot element;
   /* partition */
 
   while (i <= j) {
