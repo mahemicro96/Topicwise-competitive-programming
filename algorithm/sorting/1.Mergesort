@@ -25,29 +25,27 @@ void merge(int arr[], int l, int m, int r) {
   k = l; // Initial index of merged subarray 
   while (i < n1 && j < n2) {
     if (L[i] <= R[j]) {
-      arr[k] = L[i];
-      i++;
+      arr[k++] = L[i++];
+      
     } else {
-      arr[k] = R[j];
-      j++;
+      arr[k++] = R[j++];
+      
     }
-    k++;
+    
   }
 
   /* Copy the remaining elements of L[], if there 
      are any */
   while (i < n1) {
-    arr[k] = L[i];
-    i++;
-    k++;
+    arr[k++] = L[i++];
+    
   }
 
   /* Copy the remaining elements of R[], if there 
      are any */
   while (j < n2) {
-    arr[k] = R[j];
-    j++;
-    k++;
+    arr[k++] = R[j++];
+    
   }
 }
 
