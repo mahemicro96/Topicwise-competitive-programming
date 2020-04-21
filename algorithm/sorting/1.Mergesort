@@ -97,3 +97,25 @@ int main() {
   printArray(arr, arr_size);
   return 0;
 }
+
+------------------------------------------------------------------
+merging 2 sorted array:
+vector<int> merge(vector<int>a,vector<int>b)
+{
+vector<int>c;
+int i=0,j=0;
+while(i!=a.size() && j!=b.size())
+{
+if(a[i]<b[i])
+c.push_back(a[i++]);
+else
+c.push_back(b[j++]);
+}
+while(i!=a.size())
+c.push_back(a[i++]);
+while(j!=b.size())
+c.push_back(b[j++]);
+return c;
+}
+
+
