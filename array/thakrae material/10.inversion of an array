@@ -20,7 +20,7 @@ int merge(vector<int> &v,int l,int m,int h)
     {
         if(v[j] < v[i])
       {
-        c += m-i;
+        c += m-i;//very important
         temp[k++] = v[j++];
       }
       else
