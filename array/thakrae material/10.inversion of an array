@@ -11,7 +11,7 @@ using namespace std;
 
 int merge(vector<int> &v,int l,int m,int h)
 {
-    int a,b,c=0;
+    
     
     vector<int>temp(h-l+1);
     
