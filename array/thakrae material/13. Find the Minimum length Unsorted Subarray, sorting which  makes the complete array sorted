@@ -1,0 +1,54 @@
+#include<iostream>
+
+#include<vector>
+
+#include<list>
+
+#include<algorithm>
+
+using namespace std;
+main() {
+  int n;
+  cin >> n;
+  while (n--) {
+    int m;
+    cin >> m;
+
+    vector < int > v(m);
+    for (int i = 0; i < m; i++)
+      cin >> v[i];
+    int big_l = 0, small_r = 0;
+    for (int i = 0; i < m - 1; i++) {
+      if (v[i] > v[i + 1]) {
+        big_l = i;
+        break;
+
+      }
+    }
+    for (int i = m - 1; i >= 1; i--) {
+      if (v[i] < v[i - 1]) {
+        small_r = i;
+        break;
+
+      }
+    }
+
+    int l = big_l, r = small_r;
+
+    auto max = * max_element(v.begin() + big_l, v.begin() + small_r + 1);
+
+    auto min = * min_element(v.begin() + big_l, v.begin() + small_r + 1);
+
+    for (int i = 0; i < big_l; i++)
+      if (min < v[i]) {
+        l = i;
+        break;
+      }
+    for (int i = small_r + 1; i < m; i++)
+      if (max > v[i])
+        r = i;
+    cout << l << " " << r;
+    cout << endl;
+
+  }
+}
