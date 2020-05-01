@@ -1,0 +1,40 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+using namespace std;
+bool check(vector<int>v,int max,int min)
+{
+    vector<bool>visited(v.size(),false);
+    if(max-min+1==v.size())
+    {
+        for(int i=0;i<v.size();i++)
+        {
+             //check repeation
+        if(visited[v[i]-min]==true)
+        return false;
+        visited[v[i]-min]=true;
+        }
+        return true;
+    }
+    return false;
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+        int t;
+        cin>>t;
+    vector<int>v(t);
+    for(int i=0;i<t;i++)
+    cin>>v[i];
+    auto max=*max_element(v.begin(),v.end());
+    auto min=*min_element(v.begin(),v.end());
+    if(check(v,max,min)==true)
+    cout<<"Yes"<<endl;
+    else
+    cout<<"No"<<endl;
+        
+    }
+}
