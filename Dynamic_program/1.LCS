@@ -1,0 +1,83 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<algorithm>
+using namespace std;
+int LCS(string s1,string s2,int a,int b)
+{
+    vector<vector<int>>v(a+1,vector<int>(b+1,0));
+   
+    for(int i=0;i<a+1;i++)
+    {
+        for(int j=0;j<b+1;j++)
+        {
+            if(i==0 || j==0)
+            v[i][j]=0;
+            else if(s1[i-1]==s2[j-1])
+            v[i][j]=1+v[i-1][j-1];
+            else
+            v[i][j]=max(v[i-1][j],v[i][j-1]);
+        }
+    }
+   
+    
+    // Create a character array to store the lcs string 
+    string lc_string="";
+  
+   // Start from the right-most-bottom-most corner and 
+   // one by one store characters in lcs[] 
+   int i = a, j = b; 
+   while (i > 0 && j > 0) 
+   { 
+      // If current character in X[] and Y are same, then 
+      // current character is part of LCS 
+      if (s1[i-1] == s2[j-1]) 
+      { 
+          lc_string=s1[i-1]+lc_string; // Put current character in result 
+          i--; j--;      
+      } 
+  
+      // If not same, then find the larger of two and 
+      // go in the direction of larger value 
+      else if (v[i-1][j] > v[i][j-1]) 
+         i--; 
+      else
+         j--; 
+   } 
+  
+   cout<<lc_string<<endl;
+    return v[a][b];
+
+}
+main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    int a,b;
+    cin>>a>>b;
+    string s1,s2;
+    cin>>s1>>s2;
+    cout<<LCS(s1,s2,a,b)<<endl;
+        
+    }
+}
+
+
+
+output:
+
+
+For Input:
+2
+6 6
+ABCDGH
+AEDFHR
+3 2
+ABC
+AC
+Your Output is:
+ADH
+3
+AC
+2
