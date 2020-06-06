@@ -1,39 +1,49 @@
 BFS:
-#include<queue>
-void bfs(int s, vector<int> adj[], bool vis[])
-{
-    // Your code here
-    memset(vis,false,sizeof(vis));
+vector <int> bfs(vector<int> g[], int N) {
+    vector<int>ans;
+    vector<bool>visited(N,false);
     queue<int>q;
-    q.push(s);
-    vis[s]=true;
-    while(q.size())
+    q.push(0);
+    visited[0]=true;
+    while(!q.empty())
     {
         int x=q.front();
         q.pop();
-        cout<<x<<" ";
-        for(auto i=adj[x].begin();i!=adj[x].end();i++)
+        ans.push_back(x);
+        for(auto i=g[x].begin();i!=g[x].end();i++)
         {
-            if(vis[*i]==false)
-        {
-            vis[*i]=true;
-        q.push(*i);
+            if(visited[*i]==false)
+            {
+                visited[*i]=true;
+                q.push(*i);
+            }
         }
-            
-            
-        }
-    }
-    
+     }
+        return ans;
 }
+    
 -----------------------------------------------------------
 DFS:
 A)RECURSIVE:
-void dfs(int s, vector<int> g[], bool vis[])
+void dfsutil(vector<int>g[],bool visited[],int s,vector<int>&ans)
 {
-    vis[s]=true;
-    cout<<s<<" ";
+    visited[s]=true;
+    ans.push_back(s);
     for(auto i=g[s].begin();i!=g[s].end();i++)
-    if(vis[*i]==false)
-    dfs(*i,g,vis);
+    {
+        if(visited[*i]==false)
+        dfsutil(g,visited,*i,ans);
+    }
+}
+
+vector <int> dfs(vector<int> g[], int N)
+{
+    vector<int>ans;
+    bool visited[N];
+    memset(visited,false,N);
+    int s=0;
+    dfsutil(g,visited,s,ans);
+    return ans;
+    
     
 }
