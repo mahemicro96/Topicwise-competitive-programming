@@ -1,0 +1,30 @@
+bool isCycleUtil(int i,vector<int>adj[],bool visited[],bool recstack[])
+{
+    if(visited[i]==false)
+    {
+        visited[i]=true;
+        recstack[i]=true;
+        for(auto j=adj[i].begin();j!=adj[i].end();j++)
+        {
+            if(visited[*j]==false && isCycleUtil(*j,adj,visited,recstack))
+            return true;
+            else if(recstack[*j])
+            return true;
+        }
+    }
+    recstack[i]=false;
+    return false;
+}
+bool isCyclic(int V, vector<int> adj[])
+{
+    bool visited[V];
+    bool recstack[V];
+    memset(visited,false,V);
+    memset(recstack,false,V);
+    for(int i=0;i<V;i++)
+    {
+        if(isCycleUtil(i,adj,visited,recstack))
+        return true;
+    }
+    return false;
+}
