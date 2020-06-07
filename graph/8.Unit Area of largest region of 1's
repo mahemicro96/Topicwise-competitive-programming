@@ -1,0 +1,61 @@
+good approach:
+
+
+struct reg{
+    int a,b;
+};
+int regBfs(int N,int M,int x,int y,int A[SIZE][SIZE],vector<vector<bool>>&visit)
+{
+   int row[]={-1,-1,-1,0,0,1,1,1};
+    int col[]={-1,0,1,-1,1,-1,0,1};
+  queue<reg>q;
+  reg r1;
+  r1.a=x;
+  r1.b=y;
+  q.push(r1);
+  visit[x][y]=true;
+  int count=1;
+  while(!q.empty())
+  {
+      reg r2=q.front();
+      q.pop();
+      for(int k=0;k<8;k++)
+      {
+          int rr=r2.a+row[k];
+          int cc=r2.b+col[k];
+          if(rr>=0 && cc>=0 && rr<N &&cc<M && A[rr][cc]==1 &&visit[rr][cc]==false)
+          {
+              count++;
+              reg r3;
+              r3.a=rr;
+              r3.b=cc;
+              q.push(r3);
+              visit[rr][cc]=true;
+          }
+      }
+      
+      
+      
+  }
+  return count;
+  
+}
+int findMaxArea(int N, int M, int A[SIZE][SIZE] )
+{
+    // Your code here
+    int maxReg1=0,maxReg2=0;
+    vector<vector<bool>>visit(N,vector<bool>(M,false));
+    for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<M;j++)
+        {
+            if(visit[i][j]==false&&A[i][j]==1)
+            {
+                maxReg1=regBfs(N,M,i,j,A,visit);
+                maxReg2=max(maxReg1,maxReg2);
+            }
+            
+        }
+    }
+    return maxReg2;
+}
