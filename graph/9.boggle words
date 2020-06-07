@@ -1,0 +1,63 @@
+
+int x[8] = {-1,-1,0,1,1,1,0,-1};
+int y[8] = {0,1,1,1,0,-1,-1,-1};
+
+bool dfs(vector<vector<char>> &board,string word,int i,int j, vector<vector<bool>>&vis)
+{
+    if(word.size()==1 && board[i][j]==word[0]) return true;
+    if(board[i][j]!=word[0]) return false;
+    vis[i][j] = true;
+    for(int p=0;p<8;p++)
+    {
+        int a=i+x[p],b=j+y[p];
+        if(a>=0&&b>=0&&a<board.size()&&b<board[0].size() && vis[a][b]==false)
+        {
+            bool b = dfs(board,word.substr(1),i+x[p],j+y[p],vis);
+            if(b) return true;
+        }
+    }
+    vis[i][j] = false;
+    return false;
+}
+vector<string> boggle(vector<vector<char> >& board,
+                      vector<string>& dictionary) {
+    // Your code goes here
+    int n = board.size();
+    int m = board[0].size();
+    int p = dictionary.size();
+    
+    vector<vector<bool>>vis(n,vector<bool>(m,false));
+
+     vector<string> final_ans;
+     int flag;
+     for(int k=0;k<p;k++)
+     {
+         flag = 0;
+         string word = dictionary[k];
+         for(int i=0;i<n;i++)
+         {
+             for(int j=0;j<m;j++)
+             {
+                 if(board[i][j]==word[0])
+                 {
+                     bool b = dfs(board,word,i,j,vis);
+                     if(b)
+                     {
+                         final_ans.push_back(word);
+                         flag = 1;
+                         break;
+                     }
+                 }
+             }
+             if(flag) break;
+         }
+         for(int i=0;i<n;i++)
+         {
+             for(int j=0;j<m;j++)
+             {
+                 vis[i][j]=false;
+             }
+         }
+     }
+     return final_ans;
+}
