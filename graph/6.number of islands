@@ -1,0 +1,49 @@
+/*you are required to complete this method*/
+
+/*  Function to find number of islands in the given graph
+*   A[]: input array
+*   N, M: Row and column of given matrix
+*/
+void landBfs(vector<int> A[],int N,int M, int i, int j,vector<vector<bool>> &visited)
+{
+    int row[]={-1,-1,-1,0,0,1,1,1};
+    int col[]={-1,0,1,-1,1,-1,0,1};
+    queue<pair<int,int>>q;
+    q.push(make_pair(i,j));
+    visited[i][j]=true;
+    while(!q.empty())
+    {
+        int a=q.front().first;
+        int b=q.front().second;
+        q.pop();
+        for(int k=0;k<8;k++)
+        {
+            int c=a+row[k];
+            int d=b+col[k];
+            if(c>=0 && d>=0 && c<N && d<M && A[c][d] && visited[c][d]==false)
+            {
+                visited[c][d]=true;
+                q.push(make_pair(c,d));
+            }
+        }
+    }
+}
+int findIslands(vector<int> A[], int N, int M) {
+
+
+   vector<vector<bool>>visited(N,vector<bool>(M,false));
+   int island=0;
+  
+   for(int i=0;i<N;i++)
+   {
+       for(int j=0;j<M;j++)
+       {
+           if(!visited[i][j]&& A[i][j])
+           {
+               landBfs( A,N,M, i, j,visited);
+               island++;
+           }
+       }
+   }
+   return island;
+}
