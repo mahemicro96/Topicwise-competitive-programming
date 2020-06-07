@@ -1,0 +1,39 @@
+using bfs,
+
+
+bool isCyclicBfs(int V,vector<int>g[],bool visited[],int s)
+{
+    vector<int>parent(V,-1);
+    visited[s]=true;
+    queue<int>q;
+    q.push(s);
+    while(!q.empty())
+    {
+        int u=q.front();
+        q.pop();
+        for(auto v:g[u])
+        {
+            if(visited[v]==false)
+            {
+                q.push(v);
+                visited[v]=true;
+                parent[v]=u;
+            }
+            else if(visited[v]==true && parent[u]!=v)
+            return true;
+        }
+    }
+    return false;
+}
+bool isCyclic(vector<int> g[], int V)
+{
+   bool visited[V];
+   memset(visited,false,V);
+   for(int i=0;i<V;i++)
+   {
+       if(visited[i]==false && isCyclicBfs(V,g,visited,i))
+       return true;
+   }
+   return false;
+   
+}
