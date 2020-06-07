@@ -1,0 +1,62 @@
+struct orang{
+    int a,b;
+    int tims;
+};
+int rotOranges(vector<vector<int> > &matrix, int R, int C)
+{
+    int row[]={-1,1,0,0};
+    int col[]={0,0,-1,1};
+    queue<orang>q;
+    for(int i=0;i<R;i++)
+    {
+        for(int j=0;j<C;j++)
+        {
+            //cout<<matrix[i][j]<<" ";
+            if(matrix[i][j]==2)
+            {
+                orang ro;
+                ro.a=i;
+                ro.b=j;
+                ro.tims=0;
+                q.push(ro);
+            }
+        }
+       // cout<<endl;
+    }
+    
+int ans=0;
+    while(!q.empty())
+    {
+        orang ro1=q.front();
+        q.pop();
+     
+        ans=ro1.tims;
+        for(int k=0;k<4;k++)
+        {
+            int rr=ro1.a+row[k];
+            int cc=ro1.b+col[k];
+            if(rr>=0 && cc>=0 && rr<R &&cc<C && matrix[rr][cc]==1)
+            {
+                matrix[rr][cc]=2;
+                orang ro2;
+                ro2.a=rr;
+                ro2.b=cc;
+                ro2.tims=ro1.tims+1;
+                q.push(ro2);
+            }
+        }
+        
+    }
+    //cout<<"******"<<endl;
+    for(int s=0;s<R;s++)
+ {
+    for(int t=0;t<C;t++)
+    {
+        //cout<<matrix[s][t]<<" ";
+        if(matrix[s][t]==1)
+        return -1;
+    }
+    //cout<<endl;
+}
+    return ans;
+}
