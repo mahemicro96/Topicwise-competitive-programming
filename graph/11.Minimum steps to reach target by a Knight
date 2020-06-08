@@ -1,0 +1,48 @@
+Constraints:
+1 <= T <= 100
+1 <= N <= 1000
+1 <= knight_pos(X, Y), targer_pos(X, Y) <= N
+
+// User function template for C++
+
+// KnightPos : knight position coordinates
+// targetPos : target position coordinated
+// N : square matrix size
+struct kni{
+    int a,b,step;
+};
+int minStepToReachTarget(int knightPos[], int targetPos[], int N) {
+  vector<vector<bool>>visit(N+1,vector<bool>(N+1,false));
+  queue<kni>q;
+  struct kni k1;
+  k1.a=knightPos[0];
+  k1.b=knightPos[1];
+  k1.step=0;
+  q.push(k1);
+  visit[k1.a][k1.b]=true;
+  int row[]={2,2,1,1,-1,-1,-2,-2};
+  int col[]={-1,1,-2,2,-2,2,-1,1};
+  while(!q.empty())
+  {
+      struct kni k2=q.front();
+      q.pop();
+      if(k2.a==targetPos[0]&&k2.b==targetPos[1])
+      return k2.step;
+      for(int i=0;i<8;i++)
+      {
+          int rr=k2.a+row[i];
+          int cc=k2.b+col[i];
+          if(rr>=1&&cc>=1&&rr<=N&&cc<=N&&visit[rr][cc]==false)
+          {
+              visit[rr][cc]=true;
+              struct kni k3;
+              k3.a=rr;
+              k3.b=cc;
+              k3.step=k2.step+1;
+              q.push(k3);
+          }
+      }
+  }
+  return -1;
+  }
+  
