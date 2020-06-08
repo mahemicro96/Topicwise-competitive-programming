@@ -1,0 +1,39 @@
+/*
+ * Function to find if there is a mother vertex in the given graph 
+ * V: number of vertices in the graph
+ * g[]: graph representation
+ */
+ void dfsutil(vector<int>g[],vector<bool>&visit,int x)
+ {
+     visit[x]=true;
+     for(auto i=g[x].begin();i!=g[x].end();i++)
+     {
+         if(!visit[*i])
+         {
+             dfsutil(g,visit,*i);
+         }
+     }
+ }
+
+int findMother(int V, vector<int> g[]) 
+{ 
+    // Your code here
+    vector<bool>visit(V,false);
+    int v;
+    for(int i=0;i<V;i++)
+    {
+        if(!visit[i])
+        {
+            dfsutil(g,visit,i);
+            v=i;
+        }
+    }
+    fill(visit.begin(),visit.end(),false);
+    dfsutil(g,visit,v);
+    for(int i=0;i<V;i++)
+    {
+        if(!visit[i])
+        return -1;
+    }
+    return v;
+} 
