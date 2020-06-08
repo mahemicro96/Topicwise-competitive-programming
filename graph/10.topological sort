@@ -1,0 +1,39 @@
+// The Graph structure is as folows
+
+/*  Function which sorts the graph vertices in topological form
+*   N: number of vertices
+*   adj[]: input graph
+*   NOTE: You must return dynamically allocated array
+*/
+void dfsUtil(vector<int> adj[],vector<bool>&visit,stack<int>&st,int ele)
+{
+    visit[ele]=true;
+    for(auto i=adj[ele].begin();i!=adj[ele].end();i++)
+    {
+        if(!visit[*i])
+        dfsUtil(adj,visit,st,*i);
+    }
+    st.push(ele);
+}
+int* topoSort(int V, vector<int> adj[]) {
+    // Your code here
+    int *ans=new int[V];
+    stack<int>st;
+    vector<bool>visited(V,false);
+    for(int i=0;i<V;i++)
+    {
+        if(!visited[i])
+        dfsUtil(adj,visited,st,i);
+        
+    }
+    int k=0;
+    while(!st.empty())
+    {
+        int x=st.top();
+        st.pop();
+        ans[k]=x;
+        k++;
+        
+    }
+    return ans;
+}
