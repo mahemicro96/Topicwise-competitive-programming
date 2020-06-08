@@ -1,0 +1,99 @@
+Given N * M string array of O's and X's.
+The task is to find the number of 'X' total shapes.
+'X' shape consists of one or more adjacent X's (diagonals not included).
+Example:
+Input:
+2
+4 7
+OOOOXXO OXOXOOX XXXXOXO OXXXOOO
+10 3
+XXO OOX OXO OOO XOX XOX OXO XXO XXX OOO
+
+Output:
+4
+6
+
+
+
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<list>
+#include<algorithm>
+using namespace std;
+struct shape{
+    int a,b;
+};
+void bfs_Xshape(vector<vector<char>>&matrix,vector<vector<bool>> &visit,int a1,int b1)
+{
+    int row[]={-1,0,0,1};
+    int col[]={0,-1,1,0};
+    queue<shape>q;
+    struct shape s1;
+    s1.a=a1;
+    s1.b=b1;
+    q.push(s1);
+    visit[a1][b1]=true;
+    while(!q.empty())
+    {
+        struct shape s2=q.front();
+        q.pop();
+        for(int k=0;k<4;k++)
+        {
+            int rr=s2.a+row[k];
+            int cc=s2.b+col[k];
+            if(rr>=0&&cc>=0&&rr<matrix.size()&&cc<matrix[0].size()&&matrix[rr][cc]=='X'&&visit[rr][cc]==false)
+            {
+                visit[rr][cc]=true;
+                struct shape s3;
+                s3.a=rr;
+                s3.b=cc;
+                q.push(s3);
+            }
+        }
+    }
+    
+    
+}
+int total_shape(vector<vector<char>>&matrix)
+{
+    int count=0;
+    vector<vector<bool>>visit(matrix.size(),vector<bool>(matrix[0].size(),false));
+    
+    for(int i=0;i<matrix.size();i++)
+    {
+        for(int j=0;j<matrix[0].size();j++)
+        {
+            
+            if(matrix[i][j]=='X'&&!visit[i][j])
+            {
+           
+                bfs_Xshape(matrix,visit,i,j);
+                count++;
+            }
+            
+        }
+    }
+    return count;
+    
+}
+int main()
+{
+    int n;cin>>n;
+    while(n--)
+    {
+    int r,c;
+    cin>>r>>c;
+   // cout<<"hai";
+    vector<vector<char>>matrix(r,vector<char>(c,'o'));
+    for(int i=0;i<r;i++)
+    for(int j=0;j<c;j++)
+    cin>>matrix[i][j];
+    
+    cout<<total_shape(matrix)<<endl;
+    
+    
+        
+    }
+    return 0;
+}
