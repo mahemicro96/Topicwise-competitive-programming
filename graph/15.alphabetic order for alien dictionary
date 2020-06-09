@@ -1,0 +1,72 @@
+
+
+https://practice.geeksforgeeks.org/problems/alien-dictionary/1
+
+Given a sorted dictionary of an alien language having N words and k starting alphabets of standard dictionary.
+Find the order of characters in the alien language.
+Note: Many orders may be possible for a particular test case, thus you may return any valid order.
+/*Input:
+2
+5 4
+baa abcd abca cab cad
+3 3
+caa aaa aab
+
+Output:
+1
+1
+dict : array of strings denoting the words in alien langauge
+N : Size of the dictionary
+K : Number of characters
+*/
+void dfsUtil(vector<int>g[],vector<bool>&visit,stack<int>&stac,int K,int a)
+{
+    visit[a]=true;
+    for(auto i=g[a].begin();i!=g[a].end();i++)
+    {
+        if(!visit[*i])
+        dfsUtil(g,visit,stac,K,*i);
+    }
+    stac.push(a);
+}
+string topo_sort(vector<int>g[],int K)
+{
+    vector<bool>visit(K,false);
+    stack<int>stac;
+    for(int i=0;i<K;i++)
+    {
+        if(!visit[i])
+        {
+            dfsUtil(g,visit,stac,K,i);
+        }
+    }
+    string ans="";
+    while(!stac.empty())
+    {
+       
+        char x=(char)('a'+stac.top());
+         ans=ans+x;
+        stac.pop();
+        
+    }
+   
+    return ans;
+}
+string findOrder(string dict[], int N, int K) {
+    //vector<int>dictt(K);
+    vector<int>g[K];
+    for(int i=0;i<N-1;i++)
+    {
+        string word1=dict[i];
+        string word2=dict[i+1];
+        for(int j=0;j<min(word1.size(),word2.size());j++)
+        {
+            if(word1[j]!=word2[j])
+            {
+                
+                g[word1[j]-'a'].push_back(word2[j]-'a');
+                break;
+            }
+        }
+    }
+    return 
