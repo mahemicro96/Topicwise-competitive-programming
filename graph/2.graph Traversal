@@ -1,4 +1,4 @@
-BFS:
+BFS:using adjcency list :o(v+e)
 vector <int> bfs(vector<int> g[], int N) {
     vector<int>ans;
     vector<bool>visited(N,false);
@@ -22,8 +22,46 @@ vector <int> bfs(vector<int> g[], int N) {
         return ans;
 }
     
+    ------------------------
+ BFS :using adjcency matrix:o(v*v)
+ struct ind{
+int a,b;
+};
+ vector <int> bfs(vector<vector<int>>g, int N,int a1,int b1) {
+    vector<int>ans;
+    vector<vector<bool>>visited(N,vector<bool>(N,false));
+    queue<ind>q;
+    struct ind id1;
+    id1.a=a1;
+    id1.b=b1;
+   row={-1,-1,-1,0,0,1,1,1};
+   col={-1,0,1,-1,1,-1,0,1};
+    q.push(id1);
+    visited[a1][b1]=true;
+    while(!q.empty())
+    {
+        struct ind id2 =q.front();
+        q.pop();
+        ans.push_back(g[id2.a][id2.b]);
+        for(int k=0;k<8;k++)
+        {
+        int rr=id2.a+row[k];
+        int cc=id2.b+col[k];
+            if(rr>=0&&cc>=0&&rr<N&&cc<N&&visited[rr][cc]==false)
+            {
+                visited[rr][cc]=true;
+                struct ind id3;
+                id3.a=rr;
+                id3.b=cc;
+                q.push(id3);
+            }
+        }
+     }
+        return ans;
+}
+    
 -----------------------------------------------------------
-DFS:
+DFS:o(v+e)
 A)RECURSIVE:
 void dfsutil(vector<int>g[],bool visited[],int s,vector<int>&ans)
 {
@@ -42,7 +80,9 @@ vector <int> dfs(vector<int> g[], int N)
     bool visited[N];
     memset(visited,false,N);
     int s=0;
-    dfsutil(g,visited,s,ans);
+    for(int i=0;i<N;i++)
+    if(!visited[i])
+    dfsutil(g,visited,i,ans);
     return ans;
     
     
