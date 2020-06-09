@@ -69,4 +69,5 @@ string findOrder(string dict[], int N, int K) {
             }
         }
     }
-    return 
+     return topo_sort(g,K);
+}
