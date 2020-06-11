@@ -141,9 +141,18 @@ int main()
        { 
            insert(root, s[i]);
        }
-       printAllWords(root);
-       cout<<search(root,check);
-       //remove(root,"");
+       string st="";
+       printAllWords(root,st);
+       string check;
+       cout<<"searching:"<<endl;
+       cin>>check;
+      cout<<search(root,check);
+      cout<<"removing"<<endl;
+      string rem;
+      cin>>rem;
+       remove(root,rem);
+       printAllWords(root,st);
+       
 	}
 	return 0;
 }
