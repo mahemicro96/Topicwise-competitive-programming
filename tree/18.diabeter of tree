@@ -53,28 +53,6 @@ int diameter(Node* root)
     return ans; 
 } 
 -----------------------------------------------------
-doubt
-*****
-i understand diameter is maximum height of left subtre+maximum height of right subtree+1(for root node)
-int height(Node *root)
-{
-    if(root==NULL)
-    return 0;
-    int lh=height(root->left);
-    int rh=height(root->right);
-    return 1+max(lh,rh);
-}
-  
-/* Computes the diameter of binary tree with given root. */
-int diameter(Node* root) 
-{ 
-    if(root==NULL)
-    return 0;
-    
-   int lheight=height(root->left);
-   int rheight=height(root->right);
-   
-  return lheight+rheight+1;
-} 
-but it's fail in some test case of geeks.....why?
+
+
   
