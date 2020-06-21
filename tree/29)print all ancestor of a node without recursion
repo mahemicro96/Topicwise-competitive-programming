@@ -1,0 +1,32 @@
+bool printAncestors(struct Node * root, int target) {
+  // Code here
+  queue < Node * > q;
+  map < int, int > m;
+  q.push(root);
+  while (q.size()) {
+    Node * temp = q.front();
+    q.pop();
+    if (temp - > left) {
+      q.push(temp - > left);
+      m[temp - > left - > data] = temp - > data;
+
+      if (temp - > left - > data == target)
+        break;
+    }
+    if (temp - > right) {
+      q.push(temp - > right);
+      m[temp - > right - > data] = temp - > data;
+      if (temp - > right - > data == target)
+        break;
+    }
+  }
+  if (m.find(target) == m.end())
+    return false;
+  int x = root - > data;
+  int y = target;
+  while (y != x) {
+    cout << m[y] << " ";
+    y = m[y];
+  }
+  //cout<<x<<endl;
+}
