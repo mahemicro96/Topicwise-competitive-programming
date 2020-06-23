@@ -1,0 +1,24 @@
+Node * inOrderSuccessor(Node *root, Node *x)
+{
+   stack<Node*>s;
+   int flag=0;
+   while(1)
+   {
+       while(root)
+       {
+           s.push(root);
+           root=root->left;
+       }
+       if(s.empty())
+       return NULL;
+       root=s.top();
+       s.pop();
+       //cout<<root->data<<" ";
+       
+       if(flag)
+       return root;
+       if(root->data==x->data)
+       flag=1;
+       root=root->right;
+   }
+}
