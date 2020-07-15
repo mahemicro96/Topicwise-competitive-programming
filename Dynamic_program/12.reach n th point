@@ -1,0 +1,52 @@
+There are N points on the road ,you can step ahead by 1 or 2 . Find the number of ways you can reach at point N.
+For example:  for N=4 we have 5 possible ways [1,1,1,1]  [1,1,2]  [1,2,1]  [2,1,1]  [2 2].
+
+dp:
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+long long DP[90];
+long long Get_Count(int N)
+{
+    if(N==0) return 1;
+    if(N<0) return 0;
+
+    if(DP[N]!=-1) return DP[N];
+    return DP[N]=Get_Count(N-1)+Get_Count(N-2);
+}
+
+int main()
+{
+    int N, K, Temp, T;
+    cin>>T;
+
+    while(T--)
+    {
+        cin>>N;
+        memset(DP, -1, sizeof(DP));
+        cout<<Get_Count(N)<<endl;
+    }
+}
+-----------------------------------------
+using fibonaaci
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+ {
+    ios_base::sync_with_stdio(false);//disconnect c with c++(false)
+    cin.tie(NULL);
+	long int t,i,j,n;
+	cin>>t;
+	long int dp[101]={0};
+	dp[1]=1,dp[2]=2,dp[3]=3;
+	for(i=4;i<101;i++)
+	   dp[i]=dp[i-1]+dp[i-2];
+	while(t--)
+	{
+	    cin>>n;
+	    cout<<dp[n]<<"\n";
+	    
+	}
+	return 0;
+}
