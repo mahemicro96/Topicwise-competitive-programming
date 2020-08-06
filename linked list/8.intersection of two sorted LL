@@ -1,0 +1,30 @@
+
+Node* findIntersection(Node* head1, Node* head2)
+{
+    // Your Code Here
+    set<int>s;
+    vector<int>v;
+    while(head1)
+    {
+        s.insert(head1->data);
+        head1=head1->next;
+    }
+    while(head2)
+    {
+        if(s.find(head2->data)!=s.end())
+        {
+            v.push_back(head2->data);
+            s.erase(head2->data);
+        }
+        head2=head2->next;
+    }
+    Node *p=new Node(v[0]);
+    Node *temp=p;
+    for(int i=1;i<v.size();i++)
+    {
+        temp->next=new Node(v[i]);
+        temp=temp->next;
+    }
+    return p;
+    
+}
