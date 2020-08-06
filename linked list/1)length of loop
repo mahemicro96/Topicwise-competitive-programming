@@ -45,12 +45,14 @@ struct Node
 int countNodes(struct Node *n) 
 { 
 	int res = 1; 
-	struct Node *temp = n; 
-	while (temp->next != n) 
-	{ 
-		res++; 
-		temp = temp->next; 
-	} 
+  Node *p=n;
+  Node *q=n->next;
+  while(q!=p)
+  {
+    res++;
+    q=q->next;
+  }
+	
 	return res; 
 } 
 
@@ -103,4 +105,3 @@ int main()
 } 
 
 // This code is contributed by SHUBHAMSINGH10 
-
