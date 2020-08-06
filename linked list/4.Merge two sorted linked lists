@@ -1,48 +1,56 @@
-Node* sortedMerge(Node* head1,   Node* head2)
+#define LL SinglyLinkedListNode
+SinglyLinkedListNode* mergeLists(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) {
+    LL *Out_head=NULL;
+    LL *temp=NULL;
+while(head1 && head2)
 {
-    Node *e=NULL,*p=NULL;
-    while(head1 && head2)
+    if(head1->data<head2->data)
     {
-        if(head1->data<head2->data)
+        if(Out_head==NULL)
         {
-            Node *temp=new Node(head1->data);
-            if(e==NULL)
-            {
-                e=temp;
-                p=temp;
-            }
-            else
-            {
-                p->next=head1;
-                p=head1;
-            }
+            temp=new LL(head1->data);
+            Out_head=temp;
             head1=head1->next;
         }
-         else
+        else
         {
-            Node *temp=new Node(head2->data);
-            if(e==NULL)
-            {
-                e=temp;
-                p=e;
-            }
-             else
-            {
-                p->next=head2;
-                p=head2;
-            }
-            
+            temp->next=new LL(head1->data);
+            temp=temp->next;
+            head1=head1->next;
+
+        }
+
+    }
+    else
+    {
+        if(Out_head==NULL)
+        {
+            temp=new LL(head2->data);
+            Out_head=temp;
             head2=head2->next;
         }
+        else
+        {
+            temp->next=new LL(head2->data);
+            temp=temp->next;
+            head2=head2->next;
+
+        } 
     }
-    if(head1)
-    {
-        p->next=head1;
-    }
-     if(head2)
-    {
-        p->next=head2;
-        
-    }
-    return e;
+}
+while(head1)
+{
+    temp->next=head1;
+    temp=temp->next;
+    head1=head1->next;
+    
+}
+while(head2)
+{
+    temp->next=head2;
+    temp=temp->next;
+    head2=head2->next;
+    
+}
+return Out_head;
 }
