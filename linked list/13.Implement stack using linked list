@@ -1,0 +1,117 @@
+// C program to Implement a stack 
+//using singly linked list 
+#include <bits/stdc++.h> 
+using namespace std; 
+
+// Declare linked list node 
+
+class Node { 
+  public:
+	int data; 
+	Node* link; 
+   Node* top; 
+  Node(int x)
+  {
+    data=x;
+    link=NULL;
+  }
+  Node()
+  {
+    top=NULL;
+  }
+ 
+void push(int data) 
+{ 
+	
+	Node *temp = new Node(data); 
+	if (!temp) { 
+		cout << "\nHeap Overflow"; 
+		exit(1); 
+	} 
+
+	
+	temp->link = top; 
+	top = temp; 
+} 
+
+int isEmpty() 
+{ 
+	return top == NULL; 
+} 
+
+int peek() 
+{ 
+	
+	if (!isEmpty()) 
+		return top->data; 
+	else
+		exit(1); 
+} 
+
+
+void pop() 
+{ 
+	 Node* temp; 
+
+	if (top == NULL) { 
+		cout << "\nStack Underflow" << endl; 
+		exit(1); 
+	} 
+	else { 
+		temp = top; 
+
+		top = top->link; 
+
+		temp->link = NULL; 
+
+		free(temp); 
+	} 
+} 
+
+// Function to print all the 
+// elements of the stack 
+void display() 
+{ 
+	 Node* temp; 
+
+	if (top == NULL) { 
+		cout << "\nStack Underflow"; 
+		exit(1); 
+	} 
+	else { 
+		temp = top; 
+		while (temp != NULL) { 
+			cout << temp->data << " "; 
+
+			temp = temp->link; 
+		} 
+	} 
+} 
+};
+// Driver Code 
+int main() 
+{ 
+	// push the elements of stack 
+  Node N;
+	N.push(11); 
+	N.push(22); 
+	N.push(33); 
+	N.push(44); 
+
+	// display stack elements 
+	N.display(); 
+
+	// print top element of stack 
+	cout << "\nTop element is :" << N.peek()<<endl; 
+	N.pop(); 
+	N.pop(); 
+
+	// display stack elements 
+	N.display(); 
+
+	// print top element of stack 
+	cout << "\nTop element is :" << N.peek(); 
+	return 0; 
+
+	// This code has been contributed by Striver 
+} 
