@@ -1,3 +1,22 @@
+
+What is a Cache?
+
+A cache is a hardware or software component that stores data so that future requests for that data can be served faster; 
+the data stored in a cache might be the result of an earlier computation or a copy of data stored elsewhere.
+
+
+What Is An LRU Cache?
+
+So a LRU Cache is a storage of items so that future access to those items can be serviced quickly and an LRU policy is used for cache eviction.
+
+least vs most recently used items:
+When we access an item in the cache it moves to the front of the list as it is the most recently used item.
+When we want to remove an item we remove it from the last of the list as it is the least recently used item in the cache.
+When we insert an item we insert it into the front of the list as it is the most recently used item.
+
+
+method:1 time:o(n) ,space:o(n)
+---------------------------------------
 /*The structure of the class is as follows 
 class LRUCache
 {
@@ -55,5 +74,59 @@ int LRUCache::get(int x)
     q.erase(itr);
     q.push_front(x);
     return m[x];
+    }
+}
+***************************************************************************************************
+method:2 time:o(1) space:o(n)
+-----------------------------
+The Approach
+
+There are many ways to do this but the most common approach is to use 2 critical structures: a doubly linked list and a hashtable.
+
+
+Our Structures
+
+Doubly Linked List: This will hold the items that our cache has. We will have n items in the cache.
+This structure satisfies the constraint for fast addition since any doubly linked list item can be added or removed in O(1) time with proper references.
+Hashtable: The hashtable will give us fast access to any item in the doubly linked list items to avoid O(n) search for items and the LRU entry (which will always be at the tail of the doubly linked list).
+
+class LRUCache {
+private:
+    // A list of (key, value) pairs
+    list<pair<int, int>> items;
+    // Map items to iterators (pointers) to list nodes
+    unordered_map<int, list<pair<int, int>>::iterator> cache;
+    // The capacity of the list
+    int capacity;
+
+public:
+    LRUCache(int capacity) : capacity(capacity) {}
+
+    int get(int key) {
+        // If key is not found in hash map, return -1
+        if (cache.find(key) == cache.end())
+            return -1;
+        // Move the (key, value) pair to the beginning of the list
+        items.splice(items.begin(), items, cache[key]);
+        return cache[key]->second;
+    }
+
+    void set(int key, int value) {
+        // The key is not in the hash table
+        if (cache.find(key) == cache.end()) {
+            // If the cache is full then delete the least recently
+            // used item, which is at the end of the list
+            if (items.size() == capacity) {
+                cache.erase(items.back().first);
+                items.pop_back();
+            }
+            items.push_front(make_pair(key, value));
+            cache[key] = items.begin();
+        } else {
+            // Update the value associated with the key
+            cache[key]->second = value;
+            // Move the (key, value) pair to the beginning of the list
+            items.splice(items.begin(), items, cache[key]);
+        }
     }
 }
