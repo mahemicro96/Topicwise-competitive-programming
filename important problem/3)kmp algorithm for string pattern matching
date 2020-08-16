@@ -1,44 +1,43 @@
 step:
-1.understand the pattern by creating kmp array using pattern string
-2.find pattern existence using kmp array and given string and given pattern
-
+1.understand the pattern by creating lps array using pattern string
+2.find pattern existence using lps array and given string and given pattern
 
 vector<int> pattern_analysis(string pat)
 {
 int m=pat.length();
 int i=1,j=0;
-vector<int>kmp(m,0);
+vector<int>lps(m,0);
 	while(i<m)
 	{
 		if(pat[i]==pat[j])
 		{
-			kmp[i]=j+1;
+			lps[i]=j+1;
 			i++;
 			j++;
 		}
 		else if(j>0)
 		{
-		 j=kmp[j-1];
+		 j=lps[j-1];
 		}
 		else{
-			kmp[i]=0;
+			lps[i]=0;
 			i++;
 		}
 	}
-	return kmp;
+	return lps;
 }
 
 
 
 int pattern_match(string s,string p)
 {
-	vector<int> kmp=pattern_analysis(p);
+	vector<int> lps=pattern_analysis(p);
 	int i=0,j=0;
 	int n=s.length();
 	int m=p.length();
 	while(i<n)
 	{
-		if(s[i]==p[i])
+		if(s[i]==p[j])
 		{
 			if(j==m-1)
 			{
@@ -51,7 +50,7 @@ int pattern_match(string s,string p)
 		}
 		else if(j>0)
 		{
-		j=kmp[j-1];}
+		j=lps[j-1];}
 		else{
 		i++;}
 	}
