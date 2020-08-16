@@ -1,8 +1,7 @@
 
-What is a Cache?
+What is a Cache? 
 
-A cache is a hardware or software component that stores data so that future requests for that data can be served faster; 
-the data stored in a cache might be the result of an earlier computation or a copy of data stored elsewhere.
+A cache is a hardware or software component that stores data of earlier computaiton so that future requests for that data can be served faster;  
 
 
 What Is An LRU Cache?
