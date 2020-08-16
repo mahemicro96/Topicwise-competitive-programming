@@ -6,7 +6,7 @@ A cache is a hardware or software component that stores data of earlier computai
 
 What Is An LRU Cache?
 
-So a LRU Cache is a storage of items so that future access to those items can be serviced quickly and an LRU policy is used for cache eviction.
+So a LRU Cache is a storage of items so that future access to those items can be serviced quickly.
 
 least vs most recently used items:
 When we access an item in the cache it moves to the front of the list as it is the most recently used item.
