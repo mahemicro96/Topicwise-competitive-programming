@@ -1,3 +1,16 @@
+note:
+
+vector<int> arr[v];
+	It displays an array of vector, each array[i] would have a vector stored in it that can traverse through many values. 
+	It is like a an Array of Linked List where the heads are only stored in array[i] positions.
+
+vector<vector<int> > arr vs vector<int> arr[v]
+	The difference between 2D Vector and an Array of Vector is that 2D Vectors can span in size while array of vectors 
+	have their dimension fixed for the array size.
+
+vector<vector<int>>arr(v) ===vector<int> arr[v]
+both can be used to represent the graph as adjecency list
+
 method:1(prefered)
 
 // A simple representation of graph using STL
@@ -18,10 +31,10 @@ void printGraph(vector<int> adj[], int V)
 {
     for (int v = 0; v < V; ++v)
     {
-        cout << "\n Adjacency list of vertex "
-             << v << "\n head ";
-        for (auto x : adj[v])
-           cout << "-> " << x;
+       for(int i=0;i<adj[v].size();i++)
+       {
+       	cout<<adj[v][i]<<" ";
+	   }
         printf("\n");
     }
 }
