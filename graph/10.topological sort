@@ -43,3 +43,39 @@ int* topoSort(int V, vector<int> adj[]) {
     }
     return ans;
 }
+------------------------------------------------------------
+using BFS with indegree:
+vector<int> topoSort(int v, vector<int> adj[]) {
+    // Your code here
+    {
+    
+    vector<int>a(v);
+    int indegree[v]={0},counter=0;
+    for(int i=0;i<v;i++)
+    {
+        for(auto it= adj[i].begin();it!=adj[i].end();++it)
+        indegree[*it]++;
+    }
+    queue<int >q;
+    for(int i=0;i<v;i++)
+        {
+            if(indegree[i]==0)
+            q.push(i);
+        }
+    while(!q.empty())
+    {
+        int temp=q.front();
+        q.pop();
+        a[counter++]=temp;
+        for(auto it=adj[temp].begin();it!=adj[temp].end();++it)
+        {
+            indegree[*it]--;
+            if(indegree[*it]==0)
+            q.push(*it);
+        }
+        
+        
+    }
+    return a;
+}
+}
