@@ -1,0 +1,28 @@
+
+  
+void DFSUtil(vector<int>adj[],int v, vector<bool> &visited) 
+{ 
+    // Mark the current node as visited and print it 
+    visited[v] = true; 
+    cout << v << " ";  
+    for(auto i = adj[v].begin(); i != adj[v].end(); ++i) 
+        if(!visited[*i]) 
+            DFSUtil(adj,*i, visited); 
+} 
+  
+  
+void connectedComponents(vector<int> v[]) 
+{ 
+   vector<bool>visited(V,false); 
+  
+    for (int v=0; v<V; v++) 
+    { 
+        if (visited[v] == false) 
+        {  
+            DFSUtil(adj,v, visited); 
+  
+            cout << "\n"; 
+        } 
+    } 
+    
+} 
