@@ -1,0 +1,96 @@
+best approach:
+find LCA of two nodes.find distance from LCA to those nodes
+
+/* C++ Program to find distance between n1 and n2 
+using one traversal */
+#include <iostream> 
+#include<bits/stdc++.h>
+using namespace std; 
+
+// A Binary Tree Node 
+struct Node 
+{ 
+	struct Node *left, *right; 
+	int key; 
+}; 
+
+// Utility function to create a new tree Node 
+Node* newNode(int key) 
+{ 
+	Node *temp = new Node; 
+	temp->key = key; 
+	temp->left = temp->right = NULL; 
+	return temp; 
+} 
+Node* LCA(Node * root, int n1,int n2) 
+{ 
+	// Your code here 
+	if (root == NULL) 
+	return root; 
+	if (root->key == n1 || root->key == n2) 
+	return root; 
+
+	Node* left = LCA(root->left, n1, n2); 
+	Node* right = LCA(root->right, n1, n2); 
+
+	if (left != NULL && right != NULL) 
+		return root; 
+  return (left)?left:right;
+	
+} 
+
+
+int findLevel(Node *root,int k,int level)
+{
+  queue<Node*>q;
+  q.push(root);
+  int c=0;
+  while(q.size())
+  {
+    int s=q.size();
+    c++;
+    while(s--)
+    {
+      Node* cur=q.front();
+      q.pop();
+      if(cur->key==k)
+        return c-1;
+      if(cur->left)
+        q.push(cur->left);
+      if(cur->right)
+        q.push(cur->right);
+    }
+  }
+  return 0;
+}
+int findDistance(Node* root, int a, int b) 
+{ 
+	// Your code here 
+	Node* lca = LCA(root, a , b); 
+
+	int d1 = findLevel(lca, a, 0); 
+	int d2 = findLevel(lca, b, 0); 
+
+	return d1 + d2; 
+} 
+
+// Driver program to test above functions 
+int main() 
+{ 
+	// Let us create binary tree given in 
+	// the above example 
+	Node * root = newNode(1); 
+	root->left = newNode(2); 
+	root->right = newNode(3); 
+	root->left->left = newNode(4); 
+	root->left->right = newNode(5); 
+	root->right->left = newNode(6); 
+	root->right->right = newNode(7); 
+	root->right->left->right = newNode(8); 
+	cout << "Dist(4, 5) = " << findDistance(root, 4, 5); 
+	cout << "\nDist(4, 6) = " << findDistance(root, 4, 6); 
+	cout << "\nDist(3, 4) = " << findDistance(root, 3, 4); 
+	cout << "\nDist(2, 4) = " << findDistance(root, 2, 4); 
+	cout << "\nDist(8, 5) = " << findDistance(root, 8, 5); 
+	return 0; 
+} 
