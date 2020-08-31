@@ -13,16 +13,19 @@ Node * merge(Node *a, Node *b) {
     if(!a) return b;
     if(!b) return a;
     
-    Node *head = NULL;
+
     if(a->data <= b->data) {
-        head = a;
-        head->next = merge(a->next, b);
+      
+        a->next = merge(a->next, b);
+         return a;
     }
+   
     else {
-        head = b;
-        head->next = merge(a, b->next);
+        
+        b->next = merge(a, b->next);
+         return b;
     }
-    return head;
+  
 }
 Node* mergeSort(Node* head) {
     if(!head || !head->next) {
