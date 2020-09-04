@@ -1,3 +1,75 @@
+Effective approach:
+--------------
+// Iterative C++ program to reverse 
+// a linked list 
+#include <iostream> 
+using namespace std; 
+
+/* Link list node */
+class Node { 
+	public:	
+	int data; 
+	 Node* next,*prev,*head;
+
+		Node()
+		{
+			head=NULL;
+		}
+	Node(int data) 
+	{ 
+		this->data = data; 
+		next = NULL; 
+		prev=NULL;
+	} 
+		void push(int data) 
+	{ 
+		Node* temp = new Node(data); 
+	if(head==NULL)
+	{
+		head=temp;
+	}
+	else
+	{
+		Node *trav=head;
+		while(trav&&trav->next)
+		{
+			trav=trav->next;
+		}
+		trav->next=temp;
+		temp->prev=trav;
+	}
+	} 
+		void print() 
+	{ 
+		 Node* temp = head; 
+		while (temp != NULL) { 
+			cout << temp->data << " "; 
+			temp = temp->next; 
+		} 
+	} 
+}; 
+
+
+
+/* Driver program to test above function*/
+int main() 
+{ 
+	/* Start with the empty list */
+	Node ll; 
+	ll.push(20); 
+	ll.push(4); 
+	ll.push(15); 
+	ll.push(85); 
+
+	cout << "Given linked list\n"; 
+	ll.print(); 
+cout<<ll.head->data<<endl;
+
+	return 0; 
+} 
+--------------------------------------------------------------------------
+
+
 // C++ program to delete a linked list 
 #include <bits/stdc++.h> 
 using namespace std; 
@@ -84,9 +156,6 @@ class Node
 	Node* prev; 
 }; 
 
-/* Function to delete a node in a Doubly Linked List. 
-head_ref --> pointer to head node pointer. 
-del --> pointer to node to be deleted. */
 void deleteNode(Node** head_ref, Node* del) 
 { 
 	/* base case */
@@ -112,34 +181,19 @@ void deleteNode(Node** head_ref, Node* del)
 	return; 
 } 
 
-/* UTILITY FUNCTIONS */
-/* Function to insert a node at the 
-beginning of the Doubly Linked List */
 void push(Node** head_ref, int new_data) 
 { 
-	/* allocate node */
+
 	Node* new_node = new Node(); 
 
-	/* put in the data */
-	new_node->data = new_data; 
+	new_node->data = new_data;
 
-	/* since we are adding at the beginning, 
-	prev is always NULL */
 	new_node->prev = NULL; 
-
-	/* link the old list off the new node */
 	new_node->next = (*head_ref); 
-
-	/* change prev of head node to new node */
 	if ((*head_ref) != NULL) 
 		(*head_ref)->prev = new_node; 
-
-	/* move the head to point to the new node */
 	(*head_ref) = new_node; 
 } 
-
-/* Function to print nodes in a given doubly linked list 
-This function is same as printList() of singly linked list */
 void printList(Node* node) 
 { 
 	while (node != NULL) 
@@ -163,18 +217,12 @@ int main()
 
 	cout << "Original Linked list "; 
 	printList(head); 
-
-	/* delete nodes from the doubly linked list */
 	deleteNode(&head, head); /*delete first node*/
 	deleteNode(&head, head->next); /*delete middle node*/
 	deleteNode(&head, head->next); /*delete last node*/
-
-	/* Modified linked list will be NULL<-8->NULL */
 	cout << "\nModified Linked list "; 
 	printList(head); 
 
 	return 0; 
 } 
-
-// This code is contributed by rathbhupendra 
 
