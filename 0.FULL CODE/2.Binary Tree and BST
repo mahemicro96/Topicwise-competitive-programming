@@ -1,0 +1,134 @@
+// C++ implementation to count subtress that 
+// sum up to a given value x 
+#include <bits/stdc++.h> 
+
+using namespace std; 
+struct Node { 
+	int data; 
+	Node *left, *right; 
+}; 
+
+Node* getNode(int data) 
+{ 
+	//Node* newNode = (Node*)malloc(sizeof(Node));
+	Node* newNode=new Node();
+	newNode->data = data; 
+	newNode->left = newNode->right = NULL; 
+	return newNode; 
+} 
+
+int countSubtreesWithSumXUtil(Node* root, int x) 
+{ 
+	static int count=0; 
+	static Node* ptr=root; 
+	int l,r; 
+	if(root==NULL) 
+	return 0; 
+	
+	l=countSubtreesWithSumXUtil(root->left,x); 
+	
+	r=countSubtreesWithSumXUtil(root->right,x); 
+
+	if(l+r+root->data==x) 
+	count++; 
+
+	if(ptr!=root) 
+		return l+root->data+r; 
+	
+	return count; 
+	
+		
+} 
+int main() 
+{ 
+	/* binary tree creation 
+			5 
+			/ \ 
+		-10 3 
+		/ \ / \ 
+		9 8 -4 7 
+	*/
+	Node* root = getNode(5); 
+	root->left = getNode(-10); 
+	root->right = getNode(3); 
+	root->left->left = getNode(9); 
+	root->left->right = getNode(8); 
+	root->right->left = getNode(-4); 
+	root->right->right = getNode(7); 
+
+	int x = 7; 
+
+	cout << "Count = "
+		<< countSubtreesWithSumXUtil(root, x); 
+
+	return 0; 
+} 
+---------------------------------------------------
+// C++ program to demonstrate insertion 
+// in a BST recursively. 
+#include <iostream> 
+using namespace std; 
+
+class BST 
+{ 
+	int data; 
+	BST *left, *right; 
+
+	public: 
+	
+	BST()
+    {
+      data=0;
+      left=NULL; 
+      right=NULL;
+    }
+	BST(int value)
+    {
+      data = value; 
+	left = right = NULL; 
+    }
+	BST* Insert(BST *root, int value) 
+    {
+      
+      if(!root) 
+	{ 
+		return new BST(value); 
+	} 
+
+	if(value > root->data) 
+	{ 
+		root->right = Insert(root->right, value); 
+	} 
+	else
+	{ 
+		root->left = Insert(root->left, value); 
+	} 
+	return root; 
+    }
+	void Inorder(BST *); 
+}; 
+
+void BST :: Inorder(BST *root) 
+{ 
+	if(!root) 
+	{ 
+		return; 
+	} 
+	Inorder(root->left); 
+	cout << root->data << endl; 
+	Inorder(root->right); 
+} 
+int main() 
+{ 
+	BST b, *root = NULL; 
+	root = b.Insert(root, 50); 
+	b.Insert(root, 30); 
+	b.Insert(root, 20); 
+	b.Insert(root, 40); 
+	b.Insert(root, 70); 
+	b.Insert(root, 60); 
+	b.Insert(root, 80); 
+
+	b.Inorder(root); 
+	return 0; 
+} 
