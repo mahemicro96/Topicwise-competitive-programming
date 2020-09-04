@@ -1,69 +1,81 @@
 Effective approach:
 --------------
-#include <iostream> 
-using namespace std; 
+#include <iostream>
 
-class Node { 
-	public:	
-	int data; 
-	 Node* next,*prev,*head;
+using namespace std;
 
-		Node()
-		{
-			head=NULL;
-		}
-	Node(int data) 
-	{ 
-		this->data = data; 
-		next = NULL; 
-		prev=NULL;
-	} 
-		void push(int data) 
-	{ 
-		Node* temp = new Node(data); 
-	if(head==NULL)
-	{
-		head=temp;
-	}
-	else
-	{
-		Node *trav=head;
-		while(trav&&trav->next)
-		{
-			trav=trav->next;
-		}
-		trav->next=temp;
-		temp->prev=trav;
-	}
-	} 
-		void print() 
-	{ 
-		 Node* temp = head; 
-		while (temp != NULL) { 
-			cout << temp->data << " "; 
-			temp = temp->next; 
-		} 
-	} 
-}; 
+class Node {
+  public:
+    int data;
+  Node * next, * prev, * head;
 
-
+  Node() {
+    head = NULL;
+  }
+  Node(int data) {
+    this -> data = data;
+    next = NULL;
+    prev = NULL;
+  }
+  Node * push(int data) {
+    Node * temp = new Node(data);
+    if (head == NULL) {
+      head = temp;
+    } 
+    else {
+      Node * trav = head;
+      while (trav && trav -> next) {
+        trav = trav -> next;
+      }
+      trav -> next = temp;
+      temp -> prev = trav;
+    }
+    return head;
+  }
+  void print() {
+    Node * temp = head;
+    while (temp != NULL) {
+      cout << temp -> data << " ";
+      temp = temp -> next;
+    }
+  }
+};
 
 /* Driver program to test above function*/
-int main() 
-{ 
-	/* Start with the empty list */
-	Node ll; 
-	ll.push(20); 
-	ll.push(4); 
-	ll.push(15); 
-	ll.push(85); 
+void reverse(Node ** headref) {
+  Node * head = * headref;
+  Node * temp;
+  Node * prev = NULL;
+  while (head) {
+    temp = head -> next;
+    head -> next = prev;
+    prev = head;
+    head = temp;
+  }
+  * headref = prev;
+}
+int main() {
+  /* Start with the empty list */
+  Node * hea = NULL;
+  Node ll;
+  hea = ll.push(20);
+  ll.push(4);
+  ll.push(15);
+  ll.push(85);
+  cout << "Given linked list\n";
+  ll.print();
+  cout << endl;
+  cout << ll.head -> data << endl;
+  reverse( & hea);
+  Node * p = hea;
+  while (p) {
+    cout << p -> data << " ";
 
-	cout << "Given linked list\n"; 
-	ll.print(); 
-cout<<ll.head->data<<endl;
+    p = p -> next;
+  }
 
-	return 0; 
-} 
+  return 0;
+}
 --------------------------------------------------------------------------
 
 
@@ -98,24 +110,15 @@ while (current != NULL)
 
 void push(Node** head_ref, int new_data) 
 { 
-	/* allocate node */
 	Node* new_node = new Node(); 
 
-	/* put in the data */
 	new_node->data = new_data; 
-	
-	/* link the old list off the new node */
 	new_node->next = (*head_ref); 
-	
-	/* move the head to point to the new node */
 	(*head_ref) = new_node; 
 } 
 int main() 
 { 
-	/* Start with the empty list */
 	Node* head = NULL; 
-	
-	/* Use push() to construct below list 
 	1->12->1->4->1 */
 	push(&head, 1); 
 	push(&head, 4); 
