@@ -24,7 +24,7 @@ efficient approach:
 
 
 step:
-1.understand the pattern by creating lps array using pattern string
+1.understand the pattern by creating lps(longest prefix and suffix) array using pattern string
 2.find pattern existence using lps array and given string and given pattern
 
 vector<int> pattern_analysis(string pat)
@@ -80,5 +80,9 @@ int pattern_match(string s,string p)
 		i++;}
 	}
 }
+ex:
+s=aaab
+pat=aab
 
+lps=0 1 0
 	
