@@ -1,0 +1,176 @@
+1.max priority queue
+-------------------------------
+
+#include <iostream>
+using namespace std;
+int length=-1;
+void max_heapify (int Arr[ ], int i, int N)
+{
+    int largest=i;
+    int left = 2*i;              //left child
+    int right = 2*i +1  ;         //right child
+    //if(left<=N and Arr[left]<Arr[i]) for min priority queue
+    if(left<= N and Arr[left] > Arr[largest] )
+          largest = left;
+   
+         
+        //if(right<=N and Arr[right]<Arr[largest]) for min priority queue
+    if(right <= N and Arr[right] > Arr[largest] )
+        largest = right;
+    if(largest != i )
+    {
+        swap (Arr[i] , Arr[largest]);
+        max_heapify (Arr, largest,N);
+    } 
+ }
+
+ int maximum(int Arr[ ])
+    {
+        return Arr[ 0 ];  //as the maximum element is the root element in the max heap.
+    }
+int extract_maximum (int Arr[ ])
+{
+    if(length == -1)
+    {
+cout<< "Can’t remove element as queue is empty";
+        return -1;
+    }
+    int max = Arr[0];
+    Arr[0] = Arr[length];
+    length = length -1;
+    max_heapify(Arr, 0,length);
+    return max;
+}
+void increase_value (int Arr[ ], int i, int val)
+{
+    if(val < Arr[ i ])
+    {
+        cout<<"New value is less than current value, can’t be inserted" <<endl;
+        return;
+    }
+    Arr[ i ] = val;
+    //  while( i > 0 and Arr[ i/2 ] > Arr[ i ]) for min priority queue
+    while( i > 0 and Arr[ i/2 ] < Arr[ i ])
+    {
+        swap(Arr[ i/2 ], Arr[ i ]);
+        i = i/2;
+    }
+}
+
+void insert_value (int Arr[ ], int val)
+{
+    length = length + 1;
+    Arr[ length ] = -1;  //assuming all the numbers greater than 0 are to be inserted in queue.
+    increase_value(Arr, length, val);
+}
+void print(int Arr[])
+{
+    for(int i=0;i<=length;i++)
+    cout<<Arr[i]<<" ";
+    cout<<endl;
+}
+int main() {
+	int Arr[1000];
+	insert_value(Arr,6);
+	insert_value(Arr,7);
+	insert_value(Arr,8);
+	print(Arr);
+	cout<<extract_maximum(Arr);
+	cout<<endl;
+	print(Arr);
+	cout<<maximum(Arr);
+	
+	return 0;
+}
+output:
+8 7 6 
+8
+7 6 
+7
+------------------------------------------------------------------------
+
+2.min priority queue
+
+#include <iostream>
+using namespace std;
+int length=-1;
+void max_heapify (int Arr[ ], int i, int N)
+{
+    int largest=i;
+    int left = 2*i;              //left child
+    int right = 2*i +1  ;         //right child
+    if(left<= N and Arr[left] < Arr[largest] )
+          largest = left;
+   
+    if(right <= N and Arr[right] < Arr[largest] )
+        largest = right;
+    if(largest != i )
+    {
+        swap (Arr[i] , Arr[largest]);
+        max_heapify (Arr, largest,N);
+    } 
+ }
+
+ int maximum(int Arr[ ])
+    {
+        return Arr[ 0 ];  //as the maximum element is the root element in the max heap.
+    }
+int extract_maximum (int Arr[ ])
+{
+    if(length == -1)
+    {
+cout<< "Can’t remove element as queue is empty";
+        return -1;
+    }
+    int max = Arr[0];
+    Arr[0] = Arr[length];
+    length = length -1;
+    max_heapify(Arr, 0,length);
+    return max;
+}
+void increase_value (int Arr[ ], int i, int val)
+{
+    if(val < Arr[ i ])
+    {
+        cout<<"New value is less than current value, can’t be inserted" <<endl;
+        return;
+    }
+    Arr[ i ] = val;
+    while( i > 0 and Arr[ i/2 ] > Arr[ i ])
+    {
+        swap(Arr[ i/2 ], Arr[ i ]);
+        i = i/2;
+    }
+}
+
+void insert_value (int Arr[ ], int val)
+{
+    length = length + 1;
+    Arr[ length ] = -1;  //assuming all the numbers greater than 0 are to be inserted in queue.
+    increase_value(Arr, length, val);
+}
+void print(int Arr[])
+{
+    for(int i=0;i<=length;i++)
+    cout<<Arr[i]<<" ";
+    cout<<endl;
+}
+int main() {
+	int Arr[1000];
+	insert_value(Arr,6);
+	insert_value(Arr,7);
+	insert_value(Arr,8);
+	print(Arr);
+	cout<<extract_maximum(Arr);
+	cout<<endl;
+	print(Arr);
+	cout<<maximum(Arr);
+	
+	return 0;
+}
+
+output:
+6 7 8 
+6
+7 8 
+7
