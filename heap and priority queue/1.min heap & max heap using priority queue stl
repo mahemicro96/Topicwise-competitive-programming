@@ -1,3 +1,7 @@
+q:min heap & max heap using priority queue stl
+q:implement priority queue using stl
+
+
 // Note that by default C++ creates a max-heap 
 // for priority queue 
 #include <iostream> 
